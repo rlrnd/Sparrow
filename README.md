@@ -1,6 +1,6 @@
 # Project Sparrow
 <br>
-   <img height="290" width="360" src="/sparrow.png?raw=true" />
+   <img height="290px" width="360px" src="/sparrow.png?raw=true" />
 </br>
 
 # Project Goal
