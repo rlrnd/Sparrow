@@ -1,5 +1,5 @@
 # Project Sparrow
-![A sparrow](https://github.com/rlrnd/Sparrow/raw/master/sparrow.png =360x290)]
+![A sparrow](/master/sparrow.png?raw=true)]
 
 # Project Goal
 
