@@ -1,4 +1,5 @@
 # Project Sparrow
+![A sparrow](https://github.com/rlrnd/Sparrow/raw/master/sparrow.png =360x290)]
 
 # Project Goal
 
