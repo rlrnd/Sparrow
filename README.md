@@ -1,8 +1,5 @@
 # Project Sparrow
 
-
-_Revision 1: April 10, 2017_
-
 # Project Goal
 
 - Prepare RL to build new modular cloud-ready product line as the successor to RL6
