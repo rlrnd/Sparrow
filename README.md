@@ -1,5 +1,5 @@
 # Project Sparrow
-![A sparrow](/sparrow.png?raw=true)]
+![A sparrow](/sparrow.png?raw=true = 360x290)
 
 # Project Goal
 
