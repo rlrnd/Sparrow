@@ -1,5 +1,5 @@
 # Project Sparrow
-![A sparrow](/master/sparrow.png?raw=true)]
+![A sparrow](/sparrow.png?raw=true)]
 
 # Project Goal
 
