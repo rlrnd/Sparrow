@@ -1,5 +1,7 @@
 # Project Sparrow
-![A sparrow](/sparrow.png?raw=true = 360x290)
+<br>
+   <img height="290" width="360" src="/sparrow.png?raw=true" />
+</br>
 
 # Project Goal
 
