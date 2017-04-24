@@ -4,6 +4,10 @@
 
 ## Key architect concerns
 
+* Deploy on appliance
+* Huge instance cluster
+* Mixed deployment(?)
+
 ## Modules and Parts
 * Database Server (PostgreSQL)
   * Security Database
