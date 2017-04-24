@@ -23,8 +23,10 @@
   * Identity Server
   * Main App
   * Analytical App
+  * Configuration App
   * Transactional API
   * Report API
+  * Configuration API
   * Normalizer/ETL
   * Notification
   * Workflow
