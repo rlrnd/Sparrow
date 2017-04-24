@@ -1,6 +1,6 @@
 # All parts of this miniature bird
 
-![Minimal sets of parts](https://github.com/rlrnd/Sparrow/master/src/parts/Sparrow-parts.jpg)
+![Minimal sets of parts](https://github.com/rlrnd/Sparrow/blob/master/src/parts/Sparrow-parts.jpg)
 
 ## Key architect concerns
 
