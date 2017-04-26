@@ -27,7 +27,18 @@
 
 * Parts
   * Identity Server
+  
+  Based upon IdentityServer4 + Asp.Net Core Identity, making sure claims include tenantId and roles, Include 2 factors TOTP. 2 Weeks if rushed, following items not included:
+    * Register by invitation/Invite new users
+    * Email verification
+    * Might take ~2-3 weeks
+    
+
   * Main App
+
+  Asp.Net core MVC app. Mostly place holder, need to put some thoughts over JSON/security
+
+
   * Analytical App
   * Configuration App
   * Transactional API
