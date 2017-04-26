@@ -19,7 +19,7 @@
 
 
 * Message bus
-  * Kafka/zoo-keeper
+  * Kafka/zoo-keeper (dev.rlpulse.net:9092)
 
 
 * Redis cache
