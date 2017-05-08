@@ -9,18 +9,25 @@ namespace sparrow.securityServer
     {        // scopes define the resources in your system
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
+            var customProfile = new IdentityResource(
+                 name: "sparrow-app",
+                 displayName: "Sparrow Application Profile",
+                 claimTypes: new[] { "name", "email", "status", "rl-sparrow-tenant-id" });
+
             return new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
+                new IdentityResources.Phone(),
+                customProfile
             };
-        }
+    }
 
         public static IEnumerable<ApiResource> GetApiResources()
         {
             return new List<ApiResource>
             {
-                new ApiResource("api1", "My API")
+                new ApiResource("sparrow-app", "Sparrow Application")
             };
         }
 
@@ -39,7 +46,7 @@ namespace sparrow.securityServer
                     {
                         new Secret("secret".Sha256())
                     },
-                    AllowedScopes = { "api1" }
+                    AllowedScopes = { "sparrow-app" }
                 },
 
                 // resource owner password grant client
@@ -52,14 +59,14 @@ namespace sparrow.securityServer
                     {
                         new Secret("secret".Sha256())
                     },
-                    AllowedScopes = { "api1" }
+                    AllowedScopes = { "sparrow-app" }
                 },
 
                 // OpenID Connect hybrid flow and client credentials client (MVC)
                 new Client
                 {
-                    ClientId = "mvc",
-                    ClientName = "MVC Client",
+                    ClientId = "sparrow-webapp",
+                    ClientName = "Sparrow Main Web App",
                     AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
 
                     RequireConsent = true,
@@ -76,9 +83,9 @@ namespace sparrow.securityServer
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        "api1"
+                        "sparrow-app",
                     },
-                    AllowOfflineAccess = true
+                    AllowOfflineAccess = false
                 }
             };
         }

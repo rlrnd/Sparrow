@@ -4,6 +4,5 @@ namespace sparrow.securityServer.Models
 {
     public class ApplicationUser : IdentityUser
     {
-
     }
 }

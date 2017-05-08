@@ -57,11 +57,11 @@ namespace sparrow.webApp1
                 Authority = "http://localhost:5000",
                 RequireHttpsMetadata = false,
 
-                ClientId = "mvc",
+                ClientId = "sparrow-webapp",
                 ClientSecret = "secret",
 
                 ResponseType = "code id_token",
-                Scope = { "api1", "offline_access" },
+                Scope = { "sparrow-app" },
 
                 GetClaimsFromUserInfoEndpoint = true,
                 SaveTokens = true

@@ -36,8 +36,8 @@ namespace sparrow.webApp1.Controllers
 
         public async Task<IActionResult> CallApiUsingClientCredentials()
         {
-            var tokenClient = new TokenClient("http://localhost:5000/connect/token", "mvc", "secret");
-            var tokenResponse = await tokenClient.RequestClientCredentialsAsync("api1");
+            var tokenClient = new TokenClient("http://localhost:5000/connect/token", "sparrow-webapp", "secret");
+            var tokenResponse = await tokenClient.RequestClientCredentialsAsync("sparrow-app");
 
             var client = new HttpClient();
             client.SetBearerToken(tokenResponse.AccessToken);
