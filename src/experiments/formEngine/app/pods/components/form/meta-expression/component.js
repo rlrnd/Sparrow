@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import metaForm from 'form-engine/components/form/meta-form/component';
+import metaForm from 'form-engine/pods/components/form/meta-form/component';
 
 export default Ember.Component.extend({
   tagName: '',

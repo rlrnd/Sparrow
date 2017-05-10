@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import metaForm from 'form-engine/components/form/meta-form/component';
+import metaForm from 'form-engine/pods/components/form/meta-form/component';
 
 function dispatch(fn, args) {
   fn = (typeof fn === "function") ? fn : window[fn]; // Allow fn to be a function object or the name of a global function

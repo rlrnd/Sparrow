@@ -6,7 +6,7 @@ module.exports = function (app) {
 
   filesRouter.get('/:id', function (req, res) {
     let fakeFile = JSON.parse(fs.readFileSync('server/mocks/mock-file.json'));
-    fakeFile.id = req.params.id;
+    fakeFile.file.id = req.params.id;
     res.send(fakeFile);
   });
 
