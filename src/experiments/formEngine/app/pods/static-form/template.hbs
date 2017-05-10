@@ -1,0 +1,49 @@
+<div style="width:640px;float:left;">
+{{#form/meta-form caption='test form' data=model}}
+  {{#form/meta-expressions}}
+    {{#form/meta-expression id='expr_123' content='{0} != "site1" && {1} == "Jian"' depends='file.site,file.patient.firstName' }}{{/form/meta-expression}}
+    {{#form/meta-expression id='expr_124' content='{0} != "Fax" && {1} == "Jian"' depends='file.equipments.equipmentType,file.patient.firstName' }}{{/form/meta-expression}}
+    {{#form/meta-expression id='expr_126' content='{0} == "A"' depends='file.equipments.settings.settingType' }}{{/form/meta-expression}}
+  {{/form/meta-expressions}}
+  {{#form/meta-form-body}}
+    {{#form/meta-section caption='patient information'}}
+      {{#form/meta-cluster caption='Identity'}}
+        {{#form/meta-field caption='Site' editorType='text' bind="file.site" editor-max-length='50' visibleExpression=true mandatoryExpression=true readonlyExpression=true }}{{/form/meta-field}}
+        {{#form/meta-field caption='First Name' editorType='text' bind="file.patient.firstName" editor-max-length='50' visibleExpression=true}}{{/form/meta-field}}
+        {{#form/meta-field caption='Last Name' editorType='text' bind="file.patient.lastName" visibleExpression=true mandatoryExpression='expr_123' }}{{/form/meta-field}}
+        {{#form/meta-field caption='Birthday' editorType='date' bind="file.patient.dob"}}{{/form/meta-field}}
+      {{/form/meta-cluster}}
+      {{#form/meta-cluster caption='Identity'}}
+        {{#form/meta-listview caption='Equipment' bind='file.equipments'}}
+          {{#form/meta-listview-display-template}}
+            {{#form/meta-section caption='equipment details'}}
+              {{#form/meta-cluster caption='Eq Main'}}
+                {{#form/meta-field caption='Type' editorType='text' bind="file.equipments.equipmentType" visibleExpression=true }}{{/form/meta-field}}
+                {{#form/meta-field caption='Sub Type' editorType='list' bind="file.equipments.equipmentSubType" listName='EquipmentSubTypes' visibleExpression=true }}{{/form/meta-field}}
+                {{#form/meta-field caption='Sub Type 2' editorType='list' bind="file.equipments.equipmentSubType2" listName='EquipmentSubTypes' visibleExpression=true }}{{/form/meta-field}}
+                {{#form/meta-field caption='Sub Type 3' editorType='list' bind="file.equipments.equipmentSubType3" listName='EquipmentSubTypes' visibleExpression=true readonlyExpression=true }}{{/form/meta-field}}
+                {{#form/meta-field caption='Serial#' editorType='text' bind="file.equipments.modelNumber" visibleExpression='expr_124' }}{{/form/meta-field}}
+              {{/form/meta-cluster}}
+              {{#form/meta-cluster caption='Eq Sub'}}
+                {{#form/meta-listview caption='Settings' bind='file.equipments.settings'}}
+                  {{#form/meta-listview-display-template}}
+                    {{#form/meta-section caption='setting details'}}
+                      {{#form/meta-cluster caption='setting main'}}
+                        {{#form/meta-field caption='Type' editorType='text' bind="file.equipments.settings.settingType" visibleExpression=true }}{{/form/meta-field}}
+                        {{#form/meta-field caption='Value' editorType='text' bind="file.equipments.settings.settingValue" visibleExpression='expr_126' }}{{/form/meta-field}}
+                      {{/form/meta-cluster}}
+                    {{/form/meta-section}}
+                  {{/form/meta-listview-display-template}}
+                {{/form/meta-listview}}
+              {{/form/meta-cluster}}
+            {{/form/meta-section}}
+          {{/form/meta-listview-display-template}}
+        {{/form/meta-listview}}
+      {{/form/meta-cluster}}
+      {{#form/static-cluster caption='misc'}}
+        some meaningless tag soup
+      {{/form/static-cluster}}
+    {{/form/meta-section}}
+  {{/form/meta-form-body}}
+{{/form/meta-form}}
+</div>

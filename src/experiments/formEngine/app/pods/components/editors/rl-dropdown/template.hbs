@@ -1,0 +1,10 @@
+{{#power-select
+  disabled=readonly
+  options=options
+  searchField="caption"
+  searchEnabled=false
+  selected=selectedOption
+  onchange=(action "optionSelected" )
+  animationEnabled=false as |opt|}}
+  {{opt.caption}}
+{{/power-select}}

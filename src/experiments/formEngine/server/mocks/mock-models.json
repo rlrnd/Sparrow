@@ -1,0 +1,58 @@
+define('form-engine/equipment-setting/model', ['exports', 'ember-data'], function (exports, _emberData) {
+  exports['default'] = _emberData['default'].Model.extend({
+    equipment: _emberData['default'].belongsTo('equipment'),
+    settingType: _emberData['default'].attr('string'),
+    settingValue: _emberData['default'].attr('string')
+  });
+});
+define('form-engine/equipment/model', ['exports', 'ember-data'], function (exports, _emberData) {
+  exports['default'] = _emberData['default'].Model.extend({
+    file: _emberData['default'].belongsTo('file'),
+    equipmentType: _emberData['default'].attr('string'),
+    equipmentSubType: _emberData['default'].attr('string'),
+    equipmentSubType2: _emberData['default'].attr('string'),
+    equipmentSubType3: _emberData['default'].attr('string'),
+    modelNumber: _emberData['default'].attr('string'),
+    isImplant: _emberData['default'].attr('boolean'),
+    implantDate: _emberData['default'].attr('date'),
+    settings: _emberData['default'].hasMany('equipmentSetting', {
+      parent: true,
+      serialize: true
+    })
+  });
+});
+define('form-engine/location/model', ['exports', 'ember-data'], function (exports, _emberData) {
+  exports['default'] = _emberData['default'].Model.extend({
+    file: _emberData['default'].belongsTo('file'),
+    location: _emberData['default'].attr('string')
+  });
+});
+define('form-engine/file/model', ['exports', 'ember-data'], function (exports, _emberData) {
+  exports['default'] = _emberData['default'].Model.extend({
+    fileName: _emberData['default'].attr('string'),
+    site: _emberData['default'].attr('string'),
+    department: _emberData['default'].attr('string'),
+    state: _emberData['default'].attr('string'),
+    owner: _emberData['default'].attr('string'),
+    patient: _emberData['default'].belongsTo('patient', {
+      parent: true
+    }),
+    equipments: _emberData['default'].hasMany('equipment', {
+      parent: true,
+      serialize: true
+    }),
+    locations: _emberData['default'].hasMany('location', {
+      parent: true,
+      serialize: true
+    }),
+  });
+});
+define('form-engine/patient/model', ['exports', 'ember-data'], function (exports, _emberData) {
+  exports['default'] = _emberData['default'].Model.extend({
+    file: _emberData['default'].belongsTo('file'),
+    firstName: _emberData['default'].attr('string'),
+    lastName: _emberData['default'].attr('string'),
+    dob: _emberData['default'].attr('date'),
+    gender: _emberData['default'].attr('string')
+  });
+});

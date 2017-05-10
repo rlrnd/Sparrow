@@ -1,0 +1,14 @@
+{{!#if visible}}
+  {{#if caption}}
+    <div class="col-sm-4 control-label">
+      {{caption}}{{#if isRequired}}<span>*</span>{{/if}}
+    </div>
+  {{/if}}
+  <div>
+    {{component edtiorKind value=value listName=listName register-as=theEditor dateMode=dateMode readonly=readonly
+	      placeholder=placeholder readonly=readonly onClear=onClear class=(join ' ' 'factsumo-input' (for-bool validationState.valid 'has-success' 'has-error'))}}
+    {{#if errorMessage}}
+        <div class="text-danger">{{t errorMessage}}</div>
+    {{/if}}
+  </div>
+{{!/if}}

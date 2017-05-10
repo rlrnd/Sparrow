@@ -7,8 +7,7 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('designer');
-  this.route('render');
+  this.route('static-form');
 });
 
 export default Router;

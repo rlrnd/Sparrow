@@ -1,0 +1,5 @@
+{{#component componentClass data=data caption=def.caption editorType=def.editorType bind=def.bind }}
+  {{#each childComponents as |child|}}
+    {{form/form-designer parent=thisDesigner def=child}}
+  {{/each}}
+{{/component}}

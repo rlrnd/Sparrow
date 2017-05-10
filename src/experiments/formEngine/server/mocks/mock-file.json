@@ -1,0 +1,59 @@
+{
+  "file": {
+    "id": 0,
+    "fileName": "secret 007",
+    "site": "main",
+    "department": "PACU",
+    "owner": "Vincent Han",
+    "patient": 1,
+    "equipments": [1, 2]
+  },
+  "patient": [{
+    "id": 1,
+    "firstName": "Jian",
+    "lastName": "Zhou",
+    "dob": "2014-04-14T00:00:00-04:00",
+    "gender": "Male"
+  }],
+  "equipments": [{
+    "id": 1,
+    "equipmentType": "Fax",
+    "equipmentSubType": "Type1",
+    "equipmentSubType2": "Type3",
+    "equipmentSubType3": "Type1",
+    "modelNumber": "MFC223",
+    "isImplant": false,
+    "implantDate": null,
+    "settings": [1, 2]
+  }, {
+    "id": 2,
+    "equipmentType": "Box",
+    "equipmentSubType": "Type3",
+    "equipmentSubType2": "Type3",
+    "equipmentSubType3": "Type1",
+    "modelNumber": "HD154",
+    "isImplant": true,
+    "implantDate": "2014-02-14T00:00:00-04:00",
+    "settings": [3, 4]
+  }],
+  "equipmentSettings": [{
+    "id": 1,
+    "settingType": "A",
+    "settingValue": "A-Value"
+  }, {
+    "id": 2,
+    "settingType": "B",
+    "settingValue": "B-Value"
+  }, {
+    "id": 3,
+    "settingType": "C",
+    "settingValue": "C-Value"
+  }, {
+    "id": 4,
+    "settingType": "D",
+    "settingValue": "D-Value"
+  }],
+  "meta": {
+    "formName": "aaaBBB"
+  }
+}

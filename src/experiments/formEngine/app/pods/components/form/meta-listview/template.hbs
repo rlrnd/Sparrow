@@ -1,0 +1,8 @@
+<div class='list-view-title'>{{caption}}</div>
+<div class='list-view-body'>
+  {{#each data as |item|}}
+    {{#form/meta-listview-item data=item bind=bind}}
+      {{yield}}
+    {{/form/meta-listview-item}}
+  {{/each}}
+</div>
