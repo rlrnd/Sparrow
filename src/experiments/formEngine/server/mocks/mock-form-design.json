@@ -1,0 +1,67 @@
+{
+  "type": "meta-form",
+  "name": "",
+  "caption": "test form",
+  "expressions": [],
+  "body": [{
+    "type": "meta-form-body",
+    "body": [{
+      "type": "meta-section",
+      "caption": "patient information",
+      "body": [{
+        "type": "meta-cluster",
+        "caption": "Identity",
+        "body": [{
+          "type": "meta-field",
+          "caption": "Site",
+          "editorType": "text",
+          "bind": "file.site"
+        }, {
+          "type": "meta-field",
+          "caption": "First Name",
+          "editorType": "text",
+          "bind": "file.patient.firstName"
+        }, {
+          "type": "meta-field",
+          "caption": "Last Name",
+          "editorType": "text",
+          "bind": "file.patient.lastName"
+        }, {
+          "type": "meta-field",
+          "caption": "Birthday",
+          "editorType": "date",
+          "bind": "file.patient.dob"
+        }]
+      }, {
+        "type": "meta-cluster",
+        "caption": "Details",
+        "body": [{
+          "type": "meta-listview",
+          "caption": "Equipments",
+          "bind": "file.equipments",
+          "body": [{
+            "type": "meta-listview-display-template",
+            "body": [{
+              "type": "meta-section",
+              "caption": "equipment details",
+              "body": [{
+                "type": "meta-cluster",
+                "caption": "Eq Main",
+                "body": [{
+                  "type": "meta-field",
+                  "caption": "Type",
+                  "editorType": "text",
+                  "bind": "file.equipments.equipmentType"
+                }]
+              }]
+            }]
+          }]
+        }]
+      }]
+    }, {
+      "type": "meta-section",
+      "caption": "section2",
+      "body": []
+    }]
+  }]
+}

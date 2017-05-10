@@ -1,0 +1,18 @@
+<div style="width:640px;float:left;">
+  {{form/form-designer def=model.def data=model.fakeData}}
+</div>
+<div style="width:200px;float:left">
+  <hr/>
+  <table>
+    <th><td>Name</td><td>Value</td></th>
+    <tr><td>Typue</td><td>{{currDef.type}}</td></tr>
+    <tr><td>Caption</td><td>{{input type='text' value=currDef.caption}}</td></tr>
+    <tr><td>Bind</td><td>{{input type='text' value=currDef.bind}}</td></tr>
+    <tr><td colspan="2">Other Properties</td></tr>
+    <tr><td colspan="2"><button{{action 'saveField'}}>Save</button></td></tr>
+  </table>
+  <hr/>
+  <button {{action 'duplicateField'}}>Duplicate</button>
+  <button {{action 'removeField'}}>Remove</button>
+  <button {{action 'showFieldJson'}}>Show</button>
+</div>
