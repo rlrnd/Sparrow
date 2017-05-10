@@ -1,0 +1,9 @@
+{
+  "name": "form-engine",
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap-sass": "^3.3.7",
+    "open-sans-fontface": "^1.4.2"
+  },
+  "devDependencies": {}
+}
