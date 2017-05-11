@@ -2,6 +2,11 @@
   {{form/form-designer def=model.def data=model.fakeData}}
 </div>
 <div style="width:200px;float:left">
+  <div>
+     {{#draggable-object content=this dragStartHook=(action 'dragStartAction') dragEndHook=(action 'dragEndAction')}}
+     Add new field
+     {{/draggable-object}}
+  </div>
   <hr/>
   <table>
     <th><td>Name</td><td>Value</td></th>

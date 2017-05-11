@@ -1,0 +1,11 @@
+{{#modal-dialog target='#spa-wrapper' renderInPlace=true close=(action "close") targetAttachment="center" translucentOverlay=true clickOutsideToClose=false container-class="ember-modal-dialog-sm input-dialog materials-dialog validate" }}
+<table>
+    <th><td>Type</td><td>{{model.def.type}}</td></th>
+    <tr><td>Editor</td><td>{{model.def.editorType}}</td></tr>
+    <tr><td>Caption</td><td>{{input type='text' value=model.def.caption}}</td></tr>
+    <tr><td>Bind</td><td>{{input type='text' value=model.def.bind}}</td></tr>
+  </table>
+<hr/>
+  <button {{action 'close' true}}>OK</button>
+  <button {{action 'close' false}}>Cancel</button>
+{{/modal-dialog}}

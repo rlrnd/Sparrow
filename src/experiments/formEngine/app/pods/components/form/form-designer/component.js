@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   tagName: 'div',
+  classNames: ["form-designer"],
   thisDesigner: null,
 
   designMode: false,
@@ -21,6 +22,10 @@ export default Ember.Component.extend({
   }),
 
   childComponents: Ember.computed.alias('def.body'),
+  hasChild: Ember.computed('def.body',function() {
+    let c = this.get('def.body');
+    return c && c.length;
+  }),
 
   compAttributes: Ember.computed('def', function () {
     let def = this.get('def');
@@ -102,10 +107,29 @@ export default Ember.Component.extend({
         this.set('def', def);
       }
     },
+
     generateJson: function () {
       let json = this.getOuterJson();
       let tes = JSON.stringify(json);
       window.alert(tes);
+    },
+
+    onDropAction: function(content) {
+      let ctrl = Ember.getOwner(this).lookup('controller:designerForm');
+      if(ctrl) {
+        let n = 0;
+        let children = this.$().find("div.form-designer");
+        let c = document.elementFromPoint(event.clientX, event.clientY);
+        if(children && children.length && c) {
+          for(let i = 0; i< children.length; i++) {
+            if(Ember.$.contains(children[i], c)) {
+              n = i;
+              break;
+            }
+          }
+        }
+        ctrl.send('beginAddElement', this, n);
+      }
     }
   }
 

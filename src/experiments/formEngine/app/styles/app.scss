@@ -1,5 +1,10 @@
 @import 'open-sans.scss';
 @import 'bootstrap';
+@import "bootstrap/theme";
+@import "ember-modal-dialog/ember-modal-structure";
+@import "ember-modal-dialog/ember-modal-appearance";
+@import "ember-power-select";
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -38,5 +43,5 @@ body > .container {
 }
 
 
+.design-mode {border: solid 1px red;}
 
-@import "ember-power-select";
