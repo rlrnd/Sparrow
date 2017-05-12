@@ -8,6 +8,7 @@ export default Ember.Component.extend({
   
   dragStart(event) {
     event.stopPropagation();
+    this.sendAction('onDragStart', this);
     return event.dataTransfer.setData('text/data', Ember.get(this, 'content'));
   }
 

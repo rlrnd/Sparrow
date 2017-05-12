@@ -67,6 +67,9 @@ export default Ember.Controller.extend({
       }
     },
 
+    onDragStart: function(designer) {
+      this.set('dragSource', designer);
+    },
     onDropped: function(designer, data) {
       let self = this;
       let def = designer.def;
@@ -74,9 +77,15 @@ export default Ember.Controller.extend({
       let seq = -1;
       if( this.isElement(def.type)) {
          parent = designer.parent;
-         seq = parent.def.body.indexOf(def);
       }
       if (data.startsWith("{")) {
+        let s = this.get('dragSource');
+        let n = s.def;
+        if(s) {
+          s.parent.def.body.removeObject(s.def);
+        }
+        seq = parent.def.body.indexOf(def);
+        parent.def.body.insertAt(seq, n);
       }
       else if (data === "new-field") {
         let addModel = {
@@ -91,7 +100,7 @@ export default Ember.Controller.extend({
             callBack: 'endAddElement',
             callParams: { 
               owner: parent,
-              seq: seq,
+              seq: parent.def.body.indexOf(def),
               def: null,
               results: null
             }

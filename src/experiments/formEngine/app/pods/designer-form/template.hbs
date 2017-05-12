@@ -1,5 +1,5 @@
 <div style="width:640px;float:left;">
-  {{form/form-designer dropped=(action 'onDropped') def=model.def data=model.fakeData}}
+  {{form/form-designer dropped=(action 'onDropped') onDragStart=(action 'onDragStart') def=model.def data=model.fakeData}}
 </div>
 <div style="width:200px;float:left">
   <div>

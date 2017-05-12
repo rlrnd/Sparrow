@@ -137,6 +137,11 @@ export default rlDraggable.extend({
       window.alert(tes);
     },
 
+    onDragStart: function() {
+      let ctrl = Ember.getOwner(this).lookup('controller:designerForm');
+      ctrl.set('dragSource', this);
+    },
+
     /*onDropAction: function(content) {
       let ctrl = Ember.getOwner(this).lookup('controller:designerForm');
       if(ctrl) {
