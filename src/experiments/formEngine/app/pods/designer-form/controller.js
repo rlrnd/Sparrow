@@ -3,7 +3,12 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   currElement: null,
   currDef: null,
-  newPartName: "",
+
+  isElement: function(type) {
+    return type === "meta-field";
+  },  
+
+
   actions: {
     setCurrElement: function (c) {
       let pc = this.get('currElement');
@@ -61,16 +66,19 @@ export default Ember.Controller.extend({
         cu.send('generateJson');
       }
     },
-    dragStartAction: function (content) {
-      this.set('newPartName', 'field');
-    },
-    dragEndAction: function (content) {
-      // debugger;
-    },
-    beginAddElement: function ( designer, seq ) {
+
+    onDropped: function(designer, data) {
       let self = this;
-      let elmName = self.get('newPartName');
-      if (elmName) {
+      let def = designer.def;
+      let parent = designer;
+      let seq = -1;
+      if( this.isElement(def.type)) {
+         parent = designer.parent;
+         seq = parent.def.body.indexOf(def);
+      }
+      if (data.startsWith("{")) {
+      }
+      else if (data === "new-field") {
         let addModel = {
           def: {
             type: 'meta-field',
@@ -82,7 +90,7 @@ export default Ember.Controller.extend({
             caller: self,
             callBack: 'endAddElement',
             callParams: { 
-              owner: designer,
+              owner: parent,
               seq: seq,
               def: null,
               results: null
@@ -90,7 +98,6 @@ export default Ember.Controller.extend({
           }
         };
         this.send('openDialog', 'designer-form/dialogs/field-properties', addModel, 'designer-form/dialogs/field-properties');
-        // get x,y to tell where to insert? 
       }
     },
     endAddElement: function( callParams ) {

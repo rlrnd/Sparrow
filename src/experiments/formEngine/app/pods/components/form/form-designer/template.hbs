@@ -1,7 +1,5 @@
 {{#component componentClass data=data caption=def.caption editorType=def.editorType bind=def.bind }}
-  {{#draggable-object-target action="onDropAction"}}
-      {{#each childComponents as |child|}}
-        {{form/form-designer parent=thisDesigner def=child content=child}}
-      {{/each}}
-  {{/draggable-object-target}}
+    {{#each childComponents as |child|}}
+      {{form/form-designer dropped=dropped parent=this parent=thisDesigner def=child}}
+    {{/each}}
 {{/component}}

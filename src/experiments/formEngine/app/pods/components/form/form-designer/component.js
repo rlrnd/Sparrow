@@ -1,16 +1,22 @@
 import Ember from 'ember';
+import rlDraggable from '../../gui/rl-draggable/component';
 
-export default Ember.Component.extend({
+export default rlDraggable.extend({
   tagName: 'div',
-  classNames: ["form-designer"],
+  classNames: ["form-designer", "draggableDropzone"],
   thisDesigner: null,
 
   designMode: false,
-  classNameBindings: ['designMode'],
+  dragClass : 'deactivated',
+  classNameBindings: ['designMode', 'dragClass'],
 
   borderStyle: Ember.computed('designMode', function () {
     let dm = this.get('designMode');
     return dm ? "focusedDesigner" : "unfocusedDesigner";
+  }),
+
+  content: Ember.computed('def',function(){
+    return JSON.stringify(this.get('def'));
   }),
 
   componentClass: Ember.computed('def.type', function () {
@@ -70,6 +76,23 @@ export default Ember.Component.extend({
     return def;
   },
 
+  dragLeave(event) {
+    event.preventDefault();
+    Ember.set(this, 'dragClass', 'deactivated');
+  },
+
+  dragOver(event) {
+    event.preventDefault();
+    Ember.set(this, 'dragClass', 'activated');
+  },
+
+  drop(event) {
+    var data = event.dataTransfer.getData('text/data');
+    event.stopPropagation();
+    this.sendAction('dropped', this, data);    
+    Ember.set(this, 'dragClass', 'deactivated');    
+  },
+
   actions: {
     addChild: function (c) {
       let cc = this.get('def.body');
@@ -114,7 +137,7 @@ export default Ember.Component.extend({
       window.alert(tes);
     },
 
-    onDropAction: function(content) {
+    /*onDropAction: function(content) {
       let ctrl = Ember.getOwner(this).lookup('controller:designerForm');
       if(ctrl) {
         let n = 0;
@@ -130,7 +153,7 @@ export default Ember.Component.extend({
         }
         ctrl.send('beginAddElement', this, n);
       }
-    }
-  }
+    }*/
+  } 
 
 });

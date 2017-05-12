@@ -1,11 +1,9 @@
 <div style="width:640px;float:left;">
-  {{form/form-designer def=model.def data=model.fakeData}}
+  {{form/form-designer dropped=(action 'onDropped') def=model.def data=model.fakeData}}
 </div>
 <div style="width:200px;float:left">
   <div>
-     {{#draggable-object content=this dragStartHook=(action 'dragStartAction') dragEndHook=(action 'dragEndAction')}}
-     Add new field
-     {{/draggable-object}}
+     {{#gui/rl-draggable content="new-field"}}Add new field{{/gui/rl-draggable}}
   </div>
   <hr/>
   <table>
