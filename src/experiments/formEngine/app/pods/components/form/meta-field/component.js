@@ -74,7 +74,7 @@ export default validatedWrapper.extend(formPart, {
     let mandatory = m;
     this.set('isRequired', mandatory);
     if( mandatory === true ) {
-      result.addObject(owner._lookupFactory("validation:required"));
+      result.addObject(owner.resolveRegistration('validation:required'));
     }
     this.set('selectedRules',result);
     //send action?
