@@ -64,7 +64,34 @@ const initialState = {
                     valuePath: 'patient.lastName'
                 }
             }]
-        //},{
+        },{
+            elmType: 'MetaSection',
+            props: {
+                caption: "p3"
+            },
+            children: [{
+                elmType: "MetaList",
+                props: {
+                    path: "equipments"
+                },
+                children: [{
+                    elmType: "MetaSection",
+                    props: {},
+                    children: [{
+                        elmType: 'MetaField',
+                        props: {
+                            caption: "Type",
+                            valuePath: "equipments.type"
+                        }
+                    },{
+                        elmType: 'MetaField',
+                        props: {
+                            caption: 'Brand',
+                            valuePath: 'equipments.brand'
+                        }
+                    }]
+                }]
+            }]
         }]
     }
 };

@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 import MetaForm from './controls/MetaForm';
 import MetaSection from './controls/MetaSection';
 import MetaField from './controls/MetaField';
+import MetaList from './controls/MetaList';
 
 const ElementClassRegistry = {
     "MetaForm": MetaForm,
     "MetaSection": MetaSection,
-    "MetaField": MetaField
+    "MetaField": MetaField,
+    "MetaList": MetaList
 };
 
 
