@@ -41,7 +41,7 @@ class ElementDesigner extends Component {
             let children = null;
             if (elemDef.children && elemDef.children.length) {
                 children = elemDef.children.map(function (c, i) {
-                    return React.createElement(ElementDesigner,{ elemDef: c, keyValue: i+1 }, null);
+                    return React.createElement(ElementDesigner, { elemDef: c, key: i+1, keyValue: i+1 }, null);
                 });
             }
             return React.createElement(elmClass, props, children);

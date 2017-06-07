@@ -15,7 +15,7 @@ class FormDesigner extends Component {
         };
         return (
             <div>{this.props.formVersion}
-            <ElementDesigner elemDef={this.props.formDef} keyValue={1} context={context} />
+            <ElementDesigner elemDef={this.props.formDef} key={1} context={context} />
             </div>
         );
     }

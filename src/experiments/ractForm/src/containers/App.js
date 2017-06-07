@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as fileActions from '../actions';
 
 import FileInfo from '../components/FileInfo';
-// import FormLoader from '../components/FormLoader';
+import FormLoader from '../components/FormLoader';
 import FormDesigner from '../components/FormDesigner';
 import ElementObserver from '../components/ElementObserver';
 
@@ -31,7 +31,7 @@ class App extends Component {
     }
 
   render() {
-    /* <FormLoader data={this.props.file} schema={this.props.schema} actions={this.props.actions}  /> */
+    //<FormLoader data={this.props.file} schema={this.props.schema} actions={this.props.actions}  />      
     return (      
       <div className="App">
         <div className="App-header">
@@ -41,7 +41,7 @@ class App extends Component {
         </div>
         <div className="App-body">
           <div className="Form-designer">
-             <FormDesigner data={this.props.file} schema={this.props.schema} />
+            <FormDesigner data={this.props.file} schema={this.props.schema} />      
           </div>
           <div className="Form-observer">
             <ElementObserver />
