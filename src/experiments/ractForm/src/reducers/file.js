@@ -40,6 +40,32 @@ const initialState = {
             type: 'needle',
             brand: 'intel'
         }]
+    },
+    form: {
+        elmType: 'MetaForm',
+        props: {
+            caption: 'My 3rd form' //data, schema, actions
+        },
+        children: [{
+            elmType: 'MetaSection',
+            props: {
+                caption: "p2"
+            },
+            children: [{
+                elmType: 'MetaField',
+                props: {
+                    caption: "First Name",
+                    valuePath: "patient.firstName"
+                }
+            },{
+                elmType: 'MetaField',
+                props: {
+                    caption: 'Last Name',
+                    valuePath: 'patient.lastName'
+                }
+            }]
+        //},{
+        }]
     }
 };
 
