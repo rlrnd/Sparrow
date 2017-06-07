@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as fileActions from '../actions';
+
 import MetaForm from './controls/MetaForm';
 import MetaSection from './controls/MetaSection';
 import MetaField from './controls/MetaField';
@@ -42,8 +46,20 @@ class FormLoader extends Component {
 FormLoader.propTypes = {
     formDef: PropTypes.object,
     data: PropTypes.object,
-    scheam: PropTypes.object,
+    schema: PropTypes.object,
     actions: PropTypes.any
 };
 
-export default FormLoader;
+const mapStateToProps = state => ({
+  formDef: state.form.form
+});
+
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(fileActions, dispatch)
+});
+
+export default connect(
+  mapStateToProps, mapDispatchToProps
+)(FormLoader);
+
+

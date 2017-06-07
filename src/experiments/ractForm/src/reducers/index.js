@@ -1,8 +1,9 @@
-import { combineReducers } from 'redux'
-import file from './file'
+import { combineReducers } from 'redux';
+import file from './file';
+import form from './form';
 
 const rootReducer = combineReducers({
-  file
-})
+  file, form
+});
 
-export default rootReducer 
+export default rootReducer;

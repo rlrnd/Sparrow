@@ -18,6 +18,21 @@
   font-size: large;
 }
 
+.App-body {
+  width: 100%;
+}
+
+.Form-designer {
+  width: 640px; 
+  display: inline-block;
+}
+
+.Form-observer {
+  width: 300px;
+  display: inline-block;
+  background: green;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

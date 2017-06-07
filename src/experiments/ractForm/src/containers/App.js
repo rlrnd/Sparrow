@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import * as fileActions from '../actions';
 
 import FileInfo from '../components/FileInfo';
-import FormLoader from '../components/FormLoader';
+// import FormLoader from '../components/FormLoader';
+import FormDesigner from '../components/FormDesigner';
+import ElementObserver from '../components/ElementObserver';
 
 import logo from '../logo.svg';
 import './App.css';
@@ -15,11 +17,21 @@ class App extends Component {
   static propTypes = {
     file: PropTypes.object,
     schema: PropTypes.object,
-    form: PropTypes.object,
     actions: PropTypes.object.isRequired
   }
 
+  static childContextTypes = {
+    actions: PropTypes.any   
+  }
+
+   getChildContext() {
+        return { 
+            actions: this.props.actions
+        };
+    }
+
   render() {
+    /* <FormLoader data={this.props.file} schema={this.props.schema} actions={this.props.actions}  /> */
     return (      
       <div className="App">
         <div className="App-header">
@@ -27,7 +39,14 @@ class App extends Component {
           <h2>Static MetaForm</h2>
           <h3><FileInfo /></h3>
         </div>
-        <FormLoader formDef={this.props.form} data={this.props.file} schema={this.props.schema} actions={this.props.actions}  />
+        <div className="App-body">
+          <div className="Form-designer">
+             <FormDesigner data={this.props.file} schema={this.props.schema} />
+          </div>
+          <div className="Form-observer">
+            <ElementObserver />
+          </div>
+        </div>
       </div>
     );
   }
@@ -35,8 +54,7 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   file: state.file.file,
-  schema: state.file.schema,
-  form: state.file.form
+  schema: state.file.schema
 })
 
 const mapDispatchToProps = dispatch => ({
