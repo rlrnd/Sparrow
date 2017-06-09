@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="_5SVkEIXnEeSmwfgVk-ryvQ" targetNamespace="http://camunda.org/schema/1.0/bpmn" exporter="Camunda Modeler" exporterVersion="1.8.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <bpmn2:collaboration id="Collaboration_0kgd5yu">
+    <bpmn2:participant id="Participant_14fz49h" name="Incident" processRef="testRule" />
+  </bpmn2:collaboration>
+  <bpmn2:process id="testRule" name="Incident" isExecutable="true">
+    <bpmn2:startEvent id="StartEvent_1" name="File submitted">
+      <bpmn2:outgoing>SequenceFlow_138iubd</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:sendTask id="Task_1yekdgs" name="Notify Submitter" camunda:type="external" camunda:topic="notifyPerson">
+      <bpmn2:extensionElements>
+        <camunda:field name="roleName">
+          <camunda:string>abcd</camunda:string>
+        </camunda:field>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_138iubd</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_1yu7z7f</bpmn2:outgoing>
+    </bpmn2:sendTask>
+    <bpmn2:sendTask id="Task_1m1p12m" name="Notify Case Handler" camunda:type="external" camunda:topic="notifyPerson">
+      <bpmn2:extensionElements>
+        <camunda:field name="roleName">
+          <camunda:string>xxyy</camunda:string>
+        </camunda:field>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_0gq5943</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_1k3ymf3</bpmn2:outgoing>
+    </bpmn2:sendTask>
+    <bpmn2:endEvent id="EndEvent_0gitnm1" name="Completed">
+      <bpmn2:incoming>SequenceFlow_1k3ymf3</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:userTask id="Task_10dal0e" name="Someone take a look">
+      <bpmn2:extensionElements>
+        <camunda:field name="taskType">
+          <camunda:string>Physician Comments</camunda:string>
+        </camunda:field>
+        <camunda:field name="roleName">
+          <camunda:string>Risk Manager</camunda:string>
+        </camunda:field>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_1yu7z7f</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_0gq5943</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_138iubd" sourceRef="StartEvent_1" targetRef="Task_1yekdgs">
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="SequenceFlow_1yu7z7f" sourceRef="Task_1yekdgs" targetRef="Task_10dal0e" />
+    <bpmn2:sequenceFlow id="SequenceFlow_0gq5943" sourceRef="Task_10dal0e" targetRef="Task_1m1p12m" />
+    <bpmn2:sequenceFlow id="SequenceFlow_1k3ymf3" sourceRef="Task_1m1p12m" targetRef="EndEvent_0gitnm1" />
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0kgd5yu">
+      <bpmndi:BPMNShape id="Participant_14fz49h_di" bpmnElement="Participant_14fz49h">
+        <dc:Bounds x="12" y="-180" width="1214" height="404" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="72" y="-86" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="57" y="-50" width="67" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_138iubd_di" bpmnElement="SequenceFlow_138iubd">
+        <di:waypoint xsi:type="dc:Point" x="108" y="-68" />
+        <di:waypoint xsi:type="dc:Point" x="191" y="-68" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="105" y="-89" width="90" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0qhqjht_di" bpmnElement="Task_1yekdgs">
+        <dc:Bounds x="191" y="-108" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1yu7z7f_di" bpmnElement="SequenceFlow_1yu7z7f">
+        <di:waypoint xsi:type="dc:Point" x="291" y="-68" />
+        <di:waypoint xsi:type="dc:Point" x="385" y="-68" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="338" y="-89" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Task_1m1p12m_di" bpmnElement="Task_1m1p12m">
+        <dc:Bounds x="608" y="-108" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0gq5943_di" bpmnElement="SequenceFlow_0gq5943">
+        <di:waypoint xsi:type="dc:Point" x="485" y="-68" />
+        <di:waypoint xsi:type="dc:Point" x="608" y="-68" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="546.5" y="-89" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0gitnm1_di" bpmnElement="EndEvent_0gitnm1">
+        <dc:Bounds x="805" y="-86" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="797" y="-46" width="52" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1k3ymf3_di" bpmnElement="SequenceFlow_1k3ymf3">
+        <di:waypoint xsi:type="dc:Point" x="708" y="-68" />
+        <di:waypoint xsi:type="dc:Point" x="805" y="-68" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="756.5" y="-89" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1sufllp_di" bpmnElement="Task_10dal0e">
+        <dc:Bounds x="385" y="-108" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>
