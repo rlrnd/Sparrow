@@ -36,7 +36,7 @@ This project is based upon the camunda-dot-net-showcase example provided by Camu
 * ServiceTask - In the flowchart, some tasks are carried out automatically (i.e. Notifying Patient),  these tasks can be carried out in C# code. (NotificationAdapter.cs). Once executed, the flow continues. Task is defined by "topic", each C# class need to have that annotation.
 * UserTask - Other tasks are specifically assigned to a person, which until it is specifically marked as "complete", the flow will wait. In this case, we want to create rlx task if a new user task is created and figure out who to assigned to (using tenantId, locationId, roleName...) and complete the camunda task once the rlx task is completed. 
 
-# More works to be done
+# More work to be done
 
 * Not using Camunda's buildin security mechanism might limit our ability to expose any of the cockpit functionalities. need to check.
 * There is no call back, both service tasks and user tasks are polled by C# code. Maybe it's better to write a tiny TaskListener in Java and configure the camunda to call it. Similar to [https://github.com/camunda/camunda-bpm-reactor/tree/master/examples/bpmn-task-listener]
