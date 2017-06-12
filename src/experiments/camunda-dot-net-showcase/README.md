@@ -7,7 +7,8 @@ This project is based upon the camunda-dot-net-showcase example provided by Camu
 * Download camunda community version. [https://camunda.org/release/camunda-bpm/tomcat/7.7/camunda-bpm-tomcat-7.7.0.zip]
 * (Optional) - if you need to play it on PgSQL, you need to do several things:
   * change the jdbc configuration in server\apache-tomcat-8.0.24\conf\server.xml, change the following node to 
-    <Resource name="jdbc/ProcessEngine"
+  
+  `  <Resource name="jdbc/ProcessEngine"
               auth="Container"
               type="javax.sql.DataSource" 
               factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
@@ -18,7 +19,8 @@ This project is based upon the camunda-dot-net-showcase example provided by Camu
               username="postgres"  
               password="postgres"
               maxActive="20"
-              minIdle="5" />
+              minIdle="5" />`
+
   * Copy the postgresql JDBC drvier [https://jdbc.postgresql.org/download/postgresql-42.1.1.jar] to server\apache-tomcat-8.0.24\lib
   * Create the postgreSQL database your self and run sql\create\postgres_engine_something.sql  and postgres_identity_something.sql
 * The designer can be find at [https://camunda.org/download/modeler/]. The web designer can be find at [https://github.com/bpmn-io/bpmn-js]. Run the exe version and open testRule.bpm in WorkflowCompanion. 
