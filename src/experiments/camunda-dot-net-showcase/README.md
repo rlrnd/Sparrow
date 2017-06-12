@@ -33,7 +33,7 @@ This project is based upon the camunda-dot-net-showcase example provided by Camu
 * Workflow - A BPMN 2.0 file, could be edited in web modeler, it is a flow-chart and an XML file. A workflow can call other workflow, or can call complex logic function (DMN) 
 * Deployment - We can deploy one or many workflow file to the Camunda REST server, which later can be used by application.
 * Instance - We can create an instance of a given workflow, which will execute the flow-chart and do all the automation. It can be viewed as a long running thread. 
-* ServiceTask - In the flowchart, some tasks are carried out automatically (i.e. Notifying Patient),  these tasks can be carried out in C# code. (NotificationAdapter.cs). Once executed, the flow continues.
+* ServiceTask - In the flowchart, some tasks are carried out automatically (i.e. Notifying Patient),  these tasks can be carried out in C# code. (NotificationAdapter.cs). Once executed, the flow continues. Task is defined by "topic", each C# class need to have that annotation.
 * UserTask - Other tasks are specifically assigned to a person, which until it is specifically marked as "complete", the flow will wait. In this case, we want to create rlx task if a new user task is created and figure out who to assigned to (using tenantId, locationId, roleName...) and complete the camunda task once the rlx task is completed. 
 
 # More works to be done
