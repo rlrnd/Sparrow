@@ -1,6 +1,4 @@
-import React, {
-    Component
-} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import MetaForm from './controls/MetaForm';
@@ -20,8 +18,12 @@ class ElementDesigner extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.createInnerElement =  this.createInnerElement.bind(this);
-        this.handleClicked = this.handleClicked.bind(this);
+        this.createInnerElement = this
+            .createInnerElement
+            .bind(this);
+        this.handleClicked = this
+            .handleClicked
+            .bind(this);
     }
 
     createInnerElement(elemDef, index, formProps) {
@@ -40,9 +42,15 @@ class ElementDesigner extends Component {
             props = Object.assign(props, elemDef.props);
             let children = null;
             if (elemDef.children && elemDef.children.length) {
-                children = elemDef.children.map(function (c, i) {
-                    return React.createElement(ElementDesigner, { elemDef: c, key: i+1, keyValue: i+1 }, null);
-                });
+                children = elemDef
+                    .children
+                    .map(function (c, i) {
+                        return React.createElement(ElementDesigner, {
+                            elemDef: c,
+                            key: i + 1,
+                            keyValue: i + 1
+                        }, null);
+                    });
             }
             return React.createElement(elmClass, props, children);
         }
@@ -50,7 +58,10 @@ class ElementDesigner extends Component {
 
     handleClicked(event) {
         event.stopPropagation();
-        this.context.actions.elementSelected(this.props.elemDef);
+        this
+            .context
+            .actions
+            .elementSelected(this.props.elemDef);
         // set state to have the red border?
     }
 
