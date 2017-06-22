@@ -31,7 +31,7 @@ class App extends Component {
     }
 
   render() {
-    //<FormLoader data={this.props.file} schema={this.props.schema} actions={this.props.actions}  />      
+    //<FormDesigner data={this.props.file} schema={this.props.schema} />      
     return (      
       <div className="App">
         <div className="App-header">
@@ -41,7 +41,7 @@ class App extends Component {
         </div>
         <div className="App-body">
           <div className="Form-designer">
-            <FormDesigner data={this.props.file} schema={this.props.schema} />      
+            <FormLoader data={this.props.file} schema={this.props.schema} actions={this.props.actions}  />      
           </div>
           <div className="Form-observer">
             <ElementObserver />

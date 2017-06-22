@@ -6,6 +6,11 @@ const initialState = {
         props: {
             caption: 'My 3rd form' //data, schema, actions
         },
+        exprs: [{
+            id: "expr1",
+            deps: "patient.firstName",
+            stmt: "p0 == 'Jian'"
+        }],
         children: [{
             elmType: 'MetaSection',
             props: {
@@ -20,8 +25,15 @@ const initialState = {
             },{
                 elmType: 'MetaField',
                 props: {
+                    caption: "First Name",
+                    valuePath: "patient.firstName"
+                }
+            },{
+                elmType: 'MetaField',
+                props: {
                     caption: 'Last Name',
-                    valuePath: 'patient.lastName'
+                    valuePath: 'patient.lastName',
+                    visExpr: 'expr1'
                 }
             }]
         },{

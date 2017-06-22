@@ -2,14 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-const FileInfo = ({name}) => (<div>{name}</div>);
+const FileInfo = ({lastName, firstName}) => (<div>{lastName}, {firstName}</div>);
 
 FileInfo.propTypes = {
-  name: PropTypes.string
+  lastName: PropTypes.string,
+  firstName: PropTypes.string
 }
 
 const mapStateToProps = state => ({
-  name: state.file.file.patient.lastName
+  lastName: state.file.file.patient.lastName,
+  firstName: state.file.file.patient.firstName
 })
 
 export default connect(

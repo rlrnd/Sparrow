@@ -24,7 +24,7 @@ const initialState = {
     },
     file: {
         patient: {
-            firstName: "Jian",
+            firstName: "Jian1",
             lastName: "Zhou"
         },
         equipments: [{
