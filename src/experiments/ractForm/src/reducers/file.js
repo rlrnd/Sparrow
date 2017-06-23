@@ -30,15 +30,18 @@ const initialState = {
         equipments: [{
             id: 1,
             type: 'x-ray',
-            brand: 'hp'
+            brand: 'hp',
+            serialNo: '12345'
         }, {
             id: 2,
             type: 'iv',
-            brand: 'ibm'
+            brand: 'ibm',
+            serialNo: '98765'
         }, {
             id: 3,
             type: 'needle',
-            brand: 'intel'
+            brand: 'intel',
+            serialNo: 'aabbcc'
         }]
     }
 };

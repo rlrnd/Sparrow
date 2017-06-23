@@ -4,7 +4,6 @@ import {compose, getContext} from 'recompose';
 
 export function combinePath(basePath, valuePath) {
     if(!basePath) return valuePath;
-
     let simpPath = basePath.replace(/\[\d\]/g, "");
     if (valuePath.startsWith(simpPath)) {
         valuePath = valuePath.substring(simpPath.length);

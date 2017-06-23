@@ -19,14 +19,13 @@ export function createExpressionSelector(basePath, exprId) {
             const deps = exprDef.deps.split(",");
             let paramSelectors = [];
             let paramNames = [];
-            let n = 0;
-            deps.forEach(function(dep){
+            deps.forEach(function(dep,idx){
+                dep = dep.trim();
                 const depPath = combinePath(basePath, dep);
                 // eslint-disable-next-line
                 paramSelectors.push(new Function('state',"return _.get(state.file.file,'"+depPath+"');"));
-                paramNames.push('p'+n.toString());
+                paramNames.push('p'+idx.toString());
             });
-            //paramNames.push("return " + exprDef.stmt + ";");
             paramNames.push("return (" + exprDef.stmt + ");");
             // eslint-disable-next-line
             paramSelectors.push(new Function(...paramNames));

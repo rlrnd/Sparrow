@@ -14,6 +14,10 @@ const initialState = {
             id: "expr2",
             deps: "equipments.type",
             stmt: "p0 != 'iv1'"
+        },{
+            id: "expr3",
+            deps: "patient.firstName,equipments.type",
+            stmt: "(p0 == 'Jian1') && (p1 != 'iv2')"
         }],
         children: [{
             elmType: 'MetaSection',
@@ -65,6 +69,13 @@ const initialState = {
                             caption: 'Brand',
                             valuePath: 'equipments.brand',
                             visExpr: 'expr2'
+                        }
+                    },{
+                        elmType: 'MetaField',
+                        props: {
+                            caption: "Serial No.",
+                            valuePath: "equipments.serialNo",
+                            visExpr: 'expr3'
                         }
                     }]
                 }]
