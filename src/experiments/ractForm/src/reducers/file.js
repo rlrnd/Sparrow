@@ -45,7 +45,7 @@ const initialState = {
 
 const file = (state = initialState, action) => {
     if (action.type === UPDATE_FILE) {
-        _.set(action.data, action.path, action.value);
+        _.set(state.file, action.path, action.value);
         return Object.assign({}, state);
     }
     return state;

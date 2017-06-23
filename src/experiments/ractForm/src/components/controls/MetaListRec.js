@@ -7,7 +7,7 @@ class MetaListRec extends Component {
         return { 
             data: this.props.data, 
             schema: this.props.schema,
-            path: this.props.path,
+            basePath: this.props.path,
             actions: this.props.actions
         };
     }
@@ -23,18 +23,21 @@ class MetaListRec extends Component {
 }
 
 MetaListRec.defaultProps = {
-    caption: ''
+    caption: '',
+    path: ''
 };
 
 MetaListRec.propTypes = {
-    caption: PropTypes.string    
+    caption: PropTypes.string,
+    path: PropTypes.string,
 };
 
 MetaListRec.childContextTypes = {
     data: PropTypes.object,
     schema: PropTypes.object,
-    path: PropTypes.string,
+    basePath: PropTypes.string,
     actions: PropTypes.any
 };
+
 
 export default MetaListRec;

@@ -2,28 +2,24 @@ import _ from 'lodash';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import MetaListRec from './MetaListRec';
-
+import {combinePath, connectWithPath} from '../../utils';
 
 class MetaList extends Component {
 
     render() {
-        let path = this.props.path;
-        let relativePath = path;
-        let basePath = this.context.path;
-        if(basePath && relativePath.startsWith(basePath)) {
-            relativePath = relativePath.substring(basePath.length+1);
-        }
+        let path = combinePath(this.props.basePath, this.props.path);
 
-        let data = _.get(this.context.data, relativePath, []);
+        let data = this.props.data;
         let actions = this.context.actions;
 
         let schema = this.context.schema;
         let template = this.props.children;
-        let children = data.map((d)=>
-            <MetaListRec key={d.id} data={d} schema={schema} path={path} actions={actions}>
+        let children = data.map(function(d, i) {
+            const p = path + '[' + i.toString() + ']';
+            return (<MetaListRec key={d.id} data={d} schema={schema} path={p} actions={actions}>
                 {template}
-            </MetaListRec>
-        );
+            </MetaListRec>);
+        });
         return (
             <div className="meta-list">
                 {children}
@@ -48,4 +44,13 @@ MetaList.contextTypes = {
     actions: PropTypes.any
 };
 
-export default MetaList;
+function mapStateToProps(state, ownProps) {
+    let result = {};
+    result.data = _.get(state.file.file, combinePath(ownProps.basePath, ownProps.path));
+    return result;
+}
+
+export default connectWithPath(
+  mapStateToProps
+)(MetaList);
+

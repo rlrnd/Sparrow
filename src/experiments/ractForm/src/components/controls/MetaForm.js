@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {createExpressionSelector} from '../../selectors';
+import {addExprDef} from '../../selectors';
 
 class MetaForm extends Component {
 
@@ -12,7 +12,7 @@ class MetaForm extends Component {
     componentWillMount() {
         let exprs = this.props.exprs;
         if(exprs && exprs.length) {
-            exprs.forEach( exprDef => createExpressionSelector(exprDef));
+            exprs.forEach( exprDef => addExprDef(exprDef));
         }
     }
 
@@ -20,7 +20,7 @@ class MetaForm extends Component {
         return { 
             data: this.props.data, 
             schema: this.props.schema,
-            path: '',
+            basePath: this.props.path,
             actions: this.props.actions,
             exprs: this.exprs, 
             handlers: {
@@ -44,17 +44,19 @@ class MetaForm extends Component {
 }
 
 MetaForm.defaultProps = {
-    caption: ''
+    caption: '',
+    path: ''
 };
 
 MetaForm.propTypes = {
-    caption: PropTypes.string    
+    caption: PropTypes.string,
+    path: PropTypes.string
 };
 
 MetaForm.childContextTypes = {
     data: PropTypes.object,
     schema: PropTypes.object,
-    path: PropTypes.string,
+    basePath: PropTypes.string,
     actions: PropTypes.any,
     handlers: PropTypes.any,
     exprs: PropTypes.any

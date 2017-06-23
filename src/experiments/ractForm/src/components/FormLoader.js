@@ -25,7 +25,7 @@ class FormLoader extends Component {
         if(elmClass) {
             let props = {key: index};
             if(elemDef.elmType === "MetaForm") {
-                Object.assign(props, { data: formProps.data, schema: formProps.schema, actions: formProps.actions, exprs: elemDef.exprs });
+                Object.assign(props, { data: formProps.data, schema: formProps.schema, actions: formProps.actions, exprs: elemDef.exprs, path: '' });
             }
             props = Object.assign(props, elemDef.props);
             let children = null;
