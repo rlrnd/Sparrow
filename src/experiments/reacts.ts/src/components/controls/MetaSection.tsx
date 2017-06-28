@@ -1,10 +1,10 @@
 import * as React from 'react';
 
 interface Props {
-    caption?: string
+    caption?: string;
 }
 
-class MetaSection extends React.Component<Props,{}> {
+class MetaSection extends React.Component<Props, {}> {
 
     render() {
         return (

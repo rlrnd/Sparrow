@@ -1,28 +1,29 @@
 import * as _ from 'lodash';
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import {getExpressionSelector} from '../../selectors';
 import MetaLabel from '../editors/MetaLabel';
 import MetaTextBox from '../editors/MetaTextBox';
 import {combinePath, connectWithPath} from '../../utils';
+import { updateFile } from '../../actions';
 
 interface Props {
-    caption: string,
-    value: string,
-    valuePath: string,
-    basePath: string,
-    dataType: string,
-    visExpr: string,
-    visible: boolean,
-    readonly: boolean
+    caption: string;
+    value: string;
+    valuePath: string;
+    basePath: string;
+    dataType: string;
+    visExpr: string;
+    visible: boolean;
+    readonly: boolean;
 }
 
-class MetaField extends React.Component<Props,{}> {
+interface Dispatch {
+    actUpdateFile: any
+}
 
-    constructor(props: any) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-    }
+class MetaField extends React.Component<Props & Dispatch, {}> {
 
     static defaultProps = {
         caption: '',
@@ -31,19 +32,23 @@ class MetaField extends React.Component<Props,{}> {
         dataType: 'text',
         visExpr: '',
         readonly: false
-    }
+    };
 
     static contextTypes = {
         data: PropTypes.object,
         schema: PropTypes.object,
         path: PropTypes.string,
         exprs: PropTypes.any,
-        actions: PropTypes.any,
         handlers: PropTypes.any
+    };
+
+    constructor(props: any) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event: any) {
-        this.context.actions.updateFile(combinePath(this.props.basePath, this.props.valuePath), event.target.value);
+        this.props.actUpdateFile(combinePath(this.props.basePath, this.props.valuePath), event.target.value);
     }
 
     render() {
@@ -65,15 +70,21 @@ class MetaField extends React.Component<Props,{}> {
     }
 }
 
-function mapStateToProps(state: any, ownProps:any) {
-    let value : any = _.get(state.file.file, combinePath(ownProps.basePath, ownProps.valuePath));
-    let visible : any = true;
+function mapStateToProps(state: any, ownProps: any) {
+    let value: any = _.get(state.file.file, combinePath(ownProps.basePath, ownProps.valuePath));
+    let visible: any = true;
     if (ownProps.visExpr) {
         visible = getExpressionSelector(ownProps.basePath, ownProps.visExpr)(state);
     }
-    return { value : value, visible: visible };
+    return { value: value, visible: visible };
+}
+
+function  mapDispatchToProps(dispatch:any) {
+    return {
+        actUpdateFile: bindActionCreators( updateFile, dispatch)
+    };
 }
 
 export default connectWithPath(
-  mapStateToProps
+  mapStateToProps, mapDispatchToProps
 )(MetaField);

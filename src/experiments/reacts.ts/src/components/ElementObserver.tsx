@@ -5,26 +5,26 @@ import { bindActionCreators } from 'redux';
 import fileActions from '../actions';
 
 interface Props {
-    element?: any
+    element?: any;
 }
 
 interface State {
-    caption?: string
+    caption?: string;
 } 
 
 class ElementObserver extends React.Component<Props, State> {    
 
+  static contextTypes = {
+    actions: PropTypes.any
+  };
+
   constructor(props: Props) {
       super(props);
       this.state = {
-        caption: ""
+        caption: ''
       };
       this.handleChange = this.handleChange.bind(this);
       this.handleSave = this.handleSave.bind(this);
-  }
-
-  static contextTypes = {
-    actions: PropTypes.any
   }
 
   handleChange(event: any) {
@@ -33,29 +33,26 @@ class ElementObserver extends React.Component<Props, State> {
 
   handleSave(event: any) {
     let elm = this.props.element;
-    if(elm) {
+    if (elm) {
       elm.props.caption = this.state.caption;
     }
     this.context.actions.updateForm();
-    // This could go all the way up first,
-    // do the creator here.
   }
 
   componentWillUpdate(nextProps: Props, nextState: State) {
-    if(this.props.element !== nextProps.element) {
+    if (this.props.element !== nextProps.element) {
       const elm = nextProps.element;
-      if(elm) {
+      if (elm) {
         this.setState({caption: elm.props.caption});
-      }
-      else {
-        this.setState({caption: ""});
+      } else {
+        this.setState({caption: ''});
       }
     }
   }
 
   render() {
     const elm = this.props.element;
-    if ( elm ) {
+    if (elm) {
       return ( 
         <dl>
           <dt>type</dt>
@@ -66,22 +63,20 @@ class ElementObserver extends React.Component<Props, State> {
           <dd><button type="button" onClick={this.handleSave}>Set</button></dd>
         </dl>
       );
-    }
-    else {
+    } else {
       return (<div>nothing</div>);
     }
   }
 }
 
-const mapStateToProps = (state:any) => ({
+const mapStateToProps = (state: any) => ({
   element: state.form.currElement
 });
 
-const mapDispatchToProps = (dispatch:any) => ({
+const mapDispatchToProps = (dispatch: any) => ({
     actions: bindActionCreators(fileActions, dispatch)
 });
 
 export default connect(
   mapStateToProps, mapDispatchToProps
 )(ElementObserver as any);
-

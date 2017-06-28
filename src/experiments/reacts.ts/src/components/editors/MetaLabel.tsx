@@ -1,7 +1,6 @@
 import * as React from 'react';
 import AbstractEditor, {EditorProps} from './AbstractEditor';
 
-
 class MetaLabel extends AbstractEditor<EditorProps> {
   render() {
     return (

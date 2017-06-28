@@ -1,8 +1,6 @@
+import * as _ from 'lodash';
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import fileActions from '../actions';
 import FileInfo from '../components/FileInfo';
 import FormLoader from '../components/FormLoader';
 import ElementObserver from '../components/ElementObserver';
@@ -12,20 +10,11 @@ import './App.css';
 const logo = require('../logo.svg');
 
 interface Props {
-  file: any;
-  schema: any;
-  actions: any;
+  file: object;
+  schema: object;
 }
 
 class App extends React.Component <Props, {}> {
-
-  static childContextTypes = {
-    actions: PropTypes.any
-  };
-
-  getChildContext() {
-    return {actions: this.props.actions};
-  }
 
   render() {
     return (
@@ -48,16 +37,11 @@ class App extends React.Component <Props, {}> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
-  file: state.file.file,
-  schema: state.file.schema
+const mapStateToProps = (state: object) => ({
+  file: _.get(state, "file.file"),
+  schema: _.get(state, "file.schema")
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
-  actions: bindActionCreators(fileActions, dispatch)
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect<Props, {}, {}> (
+  mapStateToProps
+)(App as any);

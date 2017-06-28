@@ -9,7 +9,7 @@ class MetaTextBox extends AbstractEditor<EditorProps> {
   }
 
   handleChange(event: any) {
-     if(this.props.onChange) {
+     if (this.props.onChange) {
        this.props.onChange(event);
      }
   }

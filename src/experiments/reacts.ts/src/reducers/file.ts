@@ -14,34 +14,34 @@ const initialState = {
             },
             equipments: {
                 type: {
-                    dataType: "text"
+                    dataType: 'text'
                 },
                 brand: {
-                    dataType: "text"
+                    dataType: 'text'
                 }
             }
         }
     },
     file: {
         patient: {
-            firstName: "Jian1",
-            lastName: "Zhou"
+            firstName: 'Jian1',
+            lastName: 'Zhou'
         },
         equipments: [{
             id: 1,
-            type: "x-ray",
-            brand: "hp",
-            serialNo: "12345"
+            type: 'x-ray',
+            brand: 'hp',
+            serialNo: '12345'
         }, {
             id: 2,
-            type: "iv",
-            brand: "ibm",
-            serialNo: "98765"
+            type: 'iv',
+            brand: 'ibm',
+            serialNo: '98765'
         }, {
             id: 3,
-            type: "needle",
-            brand: "intel",
-            serialNo: "aabbcc"
+            type: 'needle',
+            brand: 'intel',
+            serialNo: 'aabbcc'
         }]
     }
 };

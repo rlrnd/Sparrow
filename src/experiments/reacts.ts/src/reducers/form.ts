@@ -1,81 +1,81 @@
-import { UPDATE_FORM, ELM_SELECTED } from "../constants/ActionTypes";
+import { UPDATE_FORM, ELM_SELECTED } from '../constants/ActionTypes';
 
 const initialState = {
     form: {
-        elmType: "MetaForm",
+        elmType: 'MetaForm',
         props: {
-            caption: "My 3rd form" //data, schema, actions
+            caption: 'My 3rd form' 
         },
         exprs: [{
-            id: "expr1",
-            deps: "patient.firstName",
-            stmt: "p0 === 'Jian'"
-        },{
-            id: "expr2",
-            deps: "equipments.type",
-            stmt: "p0 !== 'iv1'"
-        },{
-            id: "expr3",
-            deps: "patient.firstName,equipments.type",
-            stmt: "(p0 == \"Jian1\") && (p1 != \"iv2\")"
+            id: 'expr1',
+            deps: 'patient.firstName',
+            stmt: 'p0 === "Jian"'
+        }, {
+            id: 'expr2',
+            deps: 'equipments.type',
+            stmt: 'p0 !== "iv1"'
+        }, {
+            id: 'expr3',
+            deps: 'patient.firstName,equipments.type',
+            stmt: '(p0 == \'Jian1\') && (p1 != \'iv2\')'
         }],
         children: [{
-            elmType: "MetaSection",
+            elmType: 'MetaSection',
             props: {
-                caption: "p2"
+                caption: 'p2'
             },
             children: [{
-                elmType: "MetaField",
+                elmType: 'MetaField',
                 props: {
-                    caption: "First Name",
-                    valuePath: "patient.firstName"
+                    caption: 'First Name',
+                    valuePath: 'patient.firstName'
                 }
-            },{
-                elmType: "MetaField",
+            }, {
+                elmType: 'MetaField',
                 props: {
-                    caption: "First Name",
-                    valuePath: "patient.firstName"
+                    caption: 'First Name',
+                    valuePath: 'patient.firstName'
                 }
-            },{
-                elmType: "MetaField",
+            }, {
+                elmType: 'MetaField',
                 props: {
-                    caption: "Last Name",
-                    valuePath: "patient.lastName",
-                    visExpr: "expr1"
+                    caption: 'Last Name',
+                    valuePath: 'patient.lastName',
+                    visExpr: 'expr1'
                 }
             }]
-        },{
-            elmType: "MetaSection",
+        }, {
+            elmType: 'MetaSection',
             props: {
-                caption: "p3"
+                caption: 'p3'
             },
             children: [{
-                elmType: "MetaList",
+                elmType: 'MetaList',
                 props: {
-                    path: "equipments"
+                    path: 'equipments'
                 },
                 children: [{
-                    elmType: "MetaSection",
+                    elmType: 'MetaSection',
                     props: {},
                     children: [{
-                        elmType: "MetaField",
+                        elmType: 'MetaField',
                         props: {
-                            caption: "Type",
-                            valuePath: "equipments.type"
+                            caption: 'Type',
+                            valuePath: 'equipments.type'
                         }
-                    },{
-                        elmType: "MetaField",
+                    }, {
+                        elmType: 'MetaField',
                         props: {
-                            caption: "Brand",
-                            valuePath: "equipments.brand",
-                            visExpr: "expr2"
+                            caption: 'Brand',
+                            valuePath: 'equipments.brand',
+                            visExpr: 'expr2'
                         }
-                    },{
-                        elmType: "MetaField",
+                    }, {
+                        elmType: 'MetaField',
                         props: {
-                            caption: "Serial No.",
-                            valuePath: "equipments.serialNo",
-                            visExpr: "expr3"
+                            caption: 'Serial No.',
+                            valuePath: 'equipments.serialNo',
+                            visExpr: 'expr3'
                         }
                     }]
                 }]
@@ -87,14 +87,13 @@ const initialState = {
 };
 
 const form = (state = initialState, action: any) => {
-
-    switch(action.type) {
+    switch (action.type) {
        case ELM_SELECTED: 
          state.currElement = action.elmDef;
-         return Object.assign({},state);
+         return Object.assign({}, state);
        case UPDATE_FORM: 
          state.formVersion = state.formVersion + 1;
-         return Object.assign({},state);
+         return Object.assign({}, state);
        default: return state;
     }
 };

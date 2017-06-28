@@ -5,34 +5,33 @@ import MetaListRec from './MetaListRec';
 import {combinePath, connectWithPath} from '../../utils';
 
 interface Props {
-    caption: string,
-    basePath: string,
-    path: string,
-    data: any
+    caption: string;
+    basePath: string;
+    path: string;
+    data: any;
 }
 
-class MetaList extends React.Component<Props,{}> {
+class MetaList extends React.Component<Props, {}> {
 
     static contextTypes = {
         data: PropTypes.object,
         schema: PropTypes.object,
-        path: PropTypes.string,
-        actions: PropTypes.any
-    }
-
+        path: PropTypes.string
+    };
 
     render() {
         let basePath = this.props.basePath;
         let path = combinePath( basePath, this.props.path);
         let data = this.props.data;
-        let actions = this.context.actions;
         let schema = this.context.schema;
         let template = this.props.children;
-        let children = data.map(function(d:any, i:number) {
+        let children = data.map(function(d: any, i: number) {
             const p = path + '[' + i.toString() + ']';
-            return (<MetaListRec key={d.id} data={d} schema={schema} path={p} actions={actions} basePath={basePath}>
-                {template}
-            </MetaListRec>);
+            return (
+                <MetaListRec key={d.id} data={d} schema={schema} path={p} basePath={basePath}>
+                    {template}
+                </MetaListRec>
+            );
         });
         return (
             <div className="meta-list">
@@ -42,7 +41,7 @@ class MetaList extends React.Component<Props,{}> {
     }
 }
 
-function mapStateToProps(state:any, ownProps:any) {
+function mapStateToProps(state: any, ownProps: any) {
     let data: any = _.get(state.file.file, combinePath(ownProps.basePath, ownProps.path));
     return {data: data};
 }
@@ -50,4 +49,3 @@ function mapStateToProps(state:any, ownProps:any) {
 export default connectWithPath(
   mapStateToProps
 )(MetaList);
-
