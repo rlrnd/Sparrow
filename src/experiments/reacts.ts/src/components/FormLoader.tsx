@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-
 import MetaForm from './controls/MetaForm';
 import MetaSection from './controls/MetaSection';
 import MetaField from './controls/MetaField';
@@ -19,7 +18,7 @@ interface Props {
     schema: any;
 }
 
-class FormLoader extends React.Component<Props, {}> {
+class FormLoader extends React.Component<Props, any> {
 
     static renderElement(elemDef: any, index: number, formProps: any): any {
         const elmClass = ElementClassRegistry[elemDef.elmType];
@@ -56,6 +55,6 @@ const mapStateToProps = (state: any) => ({
   schema: state.file.schema.file
 });
 
-export default connect(
+export default connect<Props, any, any>(
   mapStateToProps
-)(FormLoader as any);
+)(FormLoader);

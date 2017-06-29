@@ -1,4 +1,6 @@
 import * as _ from 'lodash';
+import { Action } from 'redux';
+import { ActionUpdateFile } from '../actions';
 import { UPDATE_FILE } from '../constants/ActionTypes';
 
 const initialState = {
@@ -46,9 +48,10 @@ const initialState = {
     }
 };
 
-const file = (state = initialState, action: any) => {
+const file = (state = initialState, action: Action) => {
     if (action.type === UPDATE_FILE) {
-        _.set(state.file, action.path, action.value);
+        const act: ActionUpdateFile = action as ActionUpdateFile;
+        _.set(state.file, act.path, act.value);
         return Object.assign({}, state);
     }
     return state;

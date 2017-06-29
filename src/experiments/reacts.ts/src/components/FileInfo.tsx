@@ -6,7 +6,7 @@ interface Props {
   firstName?: string;
 }
 
-class FileInfo extends React.Component<Props, {}> {
+class FileInfo extends React.Component<Props, any> {
     render() {
         return (
             <div>{this.props.lastName}, {this.props.firstName}</div>
@@ -19,6 +19,6 @@ const mapStateToProps = (state: any) => ({
   firstName: state.file.file.patient.firstName
 });
 
-export default connect<Props, {}, {}>(
+export default connect<Props, any, any>(
   mapStateToProps
-)(FileInfo as any);
+)(FileInfo);

@@ -1,4 +1,7 @@
+import * as _ from 'lodash';
 import { UPDATE_FORM, ELM_SELECTED } from '../constants/ActionTypes';
+import { Action } from 'redux';
+import { ActionElementSelected } from '../actions';
 
 const initialState = {
     form: {
@@ -86,10 +89,11 @@ const initialState = {
     currElement: null
 };
 
-const form = (state = initialState, action: any) => {
+const form = (state = initialState, action: Action) => {
     switch (action.type) {
        case ELM_SELECTED: 
-         state.currElement = action.elmDef;
+         const act: ActionElementSelected = action as ActionElementSelected;
+         _.set(state, 'currElement', act.elmDef);
          return Object.assign({}, state);
        case UPDATE_FORM: 
          state.formVersion = state.formVersion + 1;

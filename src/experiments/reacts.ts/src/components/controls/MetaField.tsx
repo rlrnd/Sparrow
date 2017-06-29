@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
+import {bindActionCreators, ActionCreatorsMapObject} from 'redux';
 import {getExpressionSelector} from '../../selectors';
 import MetaLabel from '../editors/MetaLabel';
 import MetaTextBox from '../editors/MetaTextBox';
@@ -20,7 +20,7 @@ interface Props {
 }
 
 interface Dispatch {
-    actUpdateFile: any
+    actions: any;
 }
 
 class MetaField extends React.Component<Props & Dispatch, {}> {
@@ -48,7 +48,7 @@ class MetaField extends React.Component<Props & Dispatch, {}> {
     }
 
     handleChange(event: any) {
-        this.props.actUpdateFile(combinePath(this.props.basePath, this.props.valuePath), event.target.value);
+        this.props.actions.updateFile(combinePath(this.props.basePath, this.props.valuePath), event.target.value);
     }
 
     render() {
@@ -79,9 +79,12 @@ function mapStateToProps(state: any, ownProps: any) {
     return { value: value, visible: visible };
 }
 
-function  mapDispatchToProps(dispatch:any) {
+function  mapDispatchToProps(dispatch: any) {
+    const actionsNeeded: ActionCreatorsMapObject = {
+        'updateFile': updateFile
+    };
     return {
-        actUpdateFile: bindActionCreators( updateFile, dispatch)
+        actions: bindActionCreators(actionsNeeded, dispatch)
     };
 }
 

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import fileActions from '../actions';
+import {bindActionCreators, ActionCreatorsMapObject} from 'redux';
+import { updateForm } from '../actions';
+
 
 interface Props {
     element?: any;
@@ -73,9 +74,14 @@ const mapStateToProps = (state: any) => ({
   element: state.form.currElement
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
-    actions: bindActionCreators(fileActions, dispatch)
-});
+function  mapDispatchToProps(dispatch: any) {
+    const actionsNeeded: ActionCreatorsMapObject = {
+        'updateFile': updateForm
+    };
+    return {
+        actions: bindActionCreators( actionsNeeded, dispatch)
+    };
+}
 
 export default connect(
   mapStateToProps, mapDispatchToProps

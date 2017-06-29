@@ -1,17 +1,23 @@
-import {ActionCreator, Action, ActionCreatorsMapObject} from 'redux';
+import {ActionCreator, Action} from 'redux';
 import * as types from '../constants/ActionTypes';
 
-export const updateFile: ActionCreator<Action> 
+export class ActionUpdateFile implements Action {
+  type: string;
+  path: string;
+  value: object;
+}
+
+export const updateFile: ActionCreator<ActionUpdateFile> 
   = (path: string, value: any) => ({ type: types.UPDATE_FILE, path, value });
+
 export const updateForm: ActionCreator<Action> 
   = () => ({type: types.UPDATE_FORM});
-export const elementSelected: ActionCreator<Action> 
+
+
+export class ActionElementSelected implements Action {
+  type: string;
+  elmDef?: object;
+}
+
+export const elementSelected: ActionCreator<ActionElementSelected> 
   = (elmDef: any) => ({type: types.ELM_SELECTED, elmDef});
-
-const FileActionCreatorsMap: ActionCreatorsMapObject = {
-    'updateFile': updateFile,
-    'updateForm': updateForm,
-    'elementSelected': elementSelected
-};
-
-export default FileActionCreatorsMap;

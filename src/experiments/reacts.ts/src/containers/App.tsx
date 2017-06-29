@@ -14,8 +14,7 @@ interface Props {
   schema: object;
 }
 
-class App extends React.Component <Props, {}> {
-
+class App extends React.Component <Props, any> {
   render() {
     return (
       <div className="App">
@@ -38,10 +37,10 @@ class App extends React.Component <Props, {}> {
 }
 
 const mapStateToProps = (state: object) => ({
-  file: _.get(state, "file.file"),
-  schema: _.get(state, "file.schema")
+  file: _.get(state, 'file.file'),
+  schema: _.get(state, 'file.schema')
 });
 
-export default connect<Props, {}, {}> (
+export default connect<Props, any, any>(
   mapStateToProps
-)(App as any);
+)(App);
