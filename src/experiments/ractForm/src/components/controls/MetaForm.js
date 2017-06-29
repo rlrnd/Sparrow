@@ -4,10 +4,14 @@ import {addExprDef} from '../../selectors';
 
 class MetaForm extends Component {
 
-     constructor(props) {
-        super(props);
-        this.exprs = {};
-    }
+    static propTypes = {
+        caption: PropTypes.string,
+        path: PropTypes.string
+    };
+
+    static childContextTypes = {
+        basePath: PropTypes.string
+    };
 
     componentWillMount() {
         let exprs = this.props.exprs;
@@ -18,14 +22,7 @@ class MetaForm extends Component {
 
     getChildContext() {
         return { 
-            data: this.props.data, 
-            schema: this.props.schema,
-            basePath: this.props.path,
-            actions: this.props.actions,
-            exprs: this.exprs, 
-            handlers: {
-                resolveExpression: this.resolveExpression
-            }
+            basePath: this.props.path
         };
     }
 
@@ -42,24 +39,5 @@ class MetaForm extends Component {
         );
     }
 }
-
-MetaForm.defaultProps = {
-    caption: '',
-    path: ''
-};
-
-MetaForm.propTypes = {
-    caption: PropTypes.string,
-    path: PropTypes.string
-};
-
-MetaForm.childContextTypes = {
-    data: PropTypes.object,
-    schema: PropTypes.object,
-    basePath: PropTypes.string,
-    actions: PropTypes.any,
-    handlers: PropTypes.any,
-    exprs: PropTypes.any
-};
 
 export default MetaForm;

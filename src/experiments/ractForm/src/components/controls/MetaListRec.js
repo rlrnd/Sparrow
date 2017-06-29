@@ -3,12 +3,18 @@ import PropTypes from 'prop-types';
 
 class MetaListRec extends Component {
 
+    static propTypes = {
+        caption: PropTypes.string,
+        path: PropTypes.string,
+    };
+
+    static childContextTypes = {
+        basePath: PropTypes.string
+    };
+
     getChildContext() {
         return { 
-            data: this.props.data, 
-            schema: this.props.schema,
-            basePath: this.props.path,
-            actions: this.props.actions
+            basePath: this.props.path
         };
     }
 
@@ -19,25 +25,6 @@ class MetaListRec extends Component {
             </div>
         );       
     }
-
 }
-
-MetaListRec.defaultProps = {
-    caption: '',
-    path: ''
-};
-
-MetaListRec.propTypes = {
-    caption: PropTypes.string,
-    path: PropTypes.string,
-};
-
-MetaListRec.childContextTypes = {
-    data: PropTypes.object,
-    schema: PropTypes.object,
-    basePath: PropTypes.string,
-    actions: PropTypes.any
-};
-
 
 export default MetaListRec;

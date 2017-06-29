@@ -1,8 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as fileActions from '../actions';
 
 import FileInfo from '../components/FileInfo';
 import FormLoader from '../components/FormLoader';
@@ -14,37 +10,21 @@ import './App.css';
 
 class App extends Component {
 
-  static propTypes = {
-    file: PropTypes.object,
-    schema: PropTypes.object,
-    actions: PropTypes.object.isRequired
-  }
-
-  static childContextTypes = {
-    actions: PropTypes.any   
-  }
-
-   getChildContext() {
-        return { 
-            actions: this.props.actions
-        };
-    }
-
   render() {
-    //<FormDesigner data={this.props.file} schema={this.props.schema} />      
-    return (      
+    //<FormDesigner data={this.props.file} schema={this.props.schema} />
+    return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={logo} className="App-logo" alt="logo"/>
           <h2>Static MetaForm</h2>
-          <h3><FileInfo /></h3>
+          <h3><FileInfo/></h3>
         </div>
         <div className="App-body">
           <div className="Form-designer">
-            <FormLoader data={this.props.file} schema={this.props.schema} actions={this.props.actions}  />      
+            <FormLoader />
           </div>
           <div className="Form-observer">
-            <ElementObserver />
+            <ElementObserver/>
           </div>
         </div>
       </div>
@@ -52,18 +32,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  file: state.file.file,
-  schema: state.file.schema
-})
-
-const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(fileActions, dispatch)
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
-
-
+export default App;

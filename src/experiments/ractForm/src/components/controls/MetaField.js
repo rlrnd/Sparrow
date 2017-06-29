@@ -5,8 +5,21 @@ import {getExpressionSelector} from '../../selectors';
 import MetaLabel from '../editors/MetaLabel';
 import MetaTextBox from '../editors/MetaTextBox';
 import {combinePath, connectWithPath} from '../../utils';
+import { bindActionCreators } from 'redux';
+import { updateFile } from '../../actions';
 
 class MetaField extends Component {
+
+    static propTypes = {
+        caption: PropTypes.string,
+        value: PropTypes.string,
+        valuePath: PropTypes.string,
+        basePath: PropTypes.string,
+        dataType: PropTypes.string,
+        visExpr: PropTypes.string,
+        visible: PropTypes.bool,
+        readonly: PropTypes.bool
+    };
 
     constructor(props) {
         super(props);
@@ -14,7 +27,7 @@ class MetaField extends Component {
     }
 
     handleChange(event) {
-        this.context.actions.updateFile(combinePath(this.props.basePath, this.props.valuePath), event.target.value);
+        this.props.actions.updateFile(combinePath(this.props.basePath, this.props.valuePath), event.target.value);
     }
 
     render() {
@@ -36,44 +49,16 @@ class MetaField extends Component {
     }
 }
 
-MetaField.defaultProps = {
-    caption: '',
-    value: '',
-    visible: true,
-    dataType: 'text',
-    visExpr: '',
-    readonly: false
-};
-
-MetaField.propTypes = {
-    caption: PropTypes.string,
-    value: PropTypes.string,
-    valuePath: PropTypes.string,
-    basePath: PropTypes.string,
-    dataType: PropTypes.string,
-    visExpr: PropTypes.string,
-    visible: PropTypes.bool,
-    readonly: PropTypes.bool
-};
-
-MetaField.contextTypes = {
-    data: PropTypes.object,
-    schema: PropTypes.object,
-    path: PropTypes.string,
-    exprs: PropTypes.any,
-    actions: PropTypes.any,
-    handlers: PropTypes.any
-};
-
 function mapStateToProps(state, ownProps) {
-    let result = {};
-    result.value = _.get(state.file.file, combinePath(ownProps.basePath, ownProps.valuePath));
-    if (ownProps.visExpr) {
-        result.visible = getExpressionSelector(ownProps.basePath, ownProps.visExpr)(state);
-    }
-    return result;
+    const value = _.get(state.file.file, combinePath(ownProps.basePath, ownProps.valuePath));
+    const visible = (ownProps.visExpr)?getExpressionSelector(ownProps.basePath, ownProps.visExpr)(state):true;
+    return { value: value, visible: visible };
 }
 
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators({updateFile: updateFile}, dispatch)
+});
+
 export default connectWithPath(
-  mapStateToProps
+  mapStateToProps, mapDispatchToProps
 )(MetaField);

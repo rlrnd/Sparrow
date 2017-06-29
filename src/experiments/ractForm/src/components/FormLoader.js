@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as fileActions from '../actions';
 
 import MetaForm from './controls/MetaForm';
 import MetaSection from './controls/MetaSection';
@@ -17,15 +14,20 @@ const ElementClassRegistry = {
     "MetaList": MetaList
 };
 
-
 class FormLoader extends Component {
+    
+    static propTypes = {
+        formDef: PropTypes.object,
+        data: PropTypes.object,
+        schema: PropTypes.object
+    };
 
     static renderElement(elemDef, index, formProps) {
         const elmClass = ElementClassRegistry[elemDef.elmType];
         if(elmClass) {
             let props = {key: index};
             if(elemDef.elmType === "MetaForm") {
-                Object.assign(props, { data: formProps.data, schema: formProps.schema, actions: formProps.actions, exprs: elemDef.exprs, path: '' });
+                Object.assign(props, { data: formProps.data, schema: formProps.schema, exprs: elemDef.exprs, path: '' });
             }
             props = Object.assign(props, elemDef.props);
             let children = null;
@@ -43,23 +45,14 @@ class FormLoader extends Component {
     }
 }
 
-FormLoader.propTypes = {
-    formDef: PropTypes.object,
-    data: PropTypes.object,
-    schema: PropTypes.object,
-    actions: PropTypes.any
-};
-
 const mapStateToProps = state => ({
-  formDef: state.form.form
-});
-
-const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(fileActions, dispatch)
+  formDef: state.form.form,
+  data: state.file.file,
+  schema: state.file.schema.file
 });
 
 export default connect(
-  mapStateToProps, mapDispatchToProps
+  mapStateToProps
 )(FormLoader);
 
 

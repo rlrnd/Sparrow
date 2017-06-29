@@ -6,17 +6,21 @@ import {combinePath, connectWithPath} from '../../utils';
 
 class MetaList extends Component {
 
+    static propTypes = {
+        caption: PropTypes.string    
+    };
+
+    static contextTypes = {
+        path: PropTypes.string
+    };
+
     render() {
-        let path = combinePath(this.props.basePath, this.props.path);
-
-        let data = this.props.data;
-        let actions = this.context.actions;
-
-        let schema = this.context.schema;
-        let template = this.props.children;
-        let children = data.map(function(d, i) {
-            const p = path + '[' + i.toString() + ']';
-            return (<MetaListRec key={d.id} data={d} schema={schema} path={p} actions={actions}>
+        const path = combinePath(this.props.basePath, this.props.path);
+        const data = this.props.data;
+        const template = this.props.children;
+        const children = data.map(function(d, i) {
+            const p = `${path}[${i}]`;
+            return (<MetaListRec key={d.id} path={p}>
                 {template}
             </MetaListRec>);
         });
@@ -28,21 +32,6 @@ class MetaList extends Component {
 
     }
 }
-
-MetaList.defaultProps = {
-    caption: ''
-};
-
-MetaList.propTypes = {
-    caption: PropTypes.string    
-};
-
-MetaList.contextTypes = {
-    data: PropTypes.object,
-    schema: PropTypes.object,
-    path: PropTypes.string,
-    actions: PropTypes.any
-};
 
 function mapStateToProps(state, ownProps) {
     let result = {};

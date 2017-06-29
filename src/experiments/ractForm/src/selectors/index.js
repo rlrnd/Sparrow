@@ -23,10 +23,10 @@ export function createExpressionSelector(basePath, exprId) {
                 dep = dep.trim();
                 const depPath = combinePath(basePath, dep);
                 // eslint-disable-next-line
-                paramSelectors.push(new Function('state',"return _.get(state.file.file,'"+depPath+"');"));
+                paramSelectors.push(new Function('state',`return _.get(state.file.file,'${depPath}');`));
                 paramNames.push('p'+idx.toString());
             });
-            paramNames.push("return (" + exprDef.stmt + ");");
+            paramNames.push(`return (${exprDef.stmt});`);
             // eslint-disable-next-line
             paramSelectors.push(new Function(...paramNames));
             result = createSelector(...paramSelectors);

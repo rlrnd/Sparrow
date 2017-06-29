@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 
 class MetaSection extends Component {
 
+    static propTypes = {
+        caption: PropTypes.string,
+    };
+
     render() {
         return (
             <div className="meta-section">
@@ -16,14 +20,5 @@ class MetaSection extends Component {
         );
     }
 }
-
-MetaSection.defaultProps = {
-    caption: '',
-
-};
-
-MetaSection.propTypes = {
-    caption: PropTypes.string,
-};
 
 export default MetaSection;

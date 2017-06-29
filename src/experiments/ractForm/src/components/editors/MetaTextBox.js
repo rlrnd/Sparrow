@@ -4,9 +4,12 @@ import PropTypes from 'prop-types';
 
 class MetaTextBox extends AbstractEditor {
 
+  static propTypes = {
+      value: PropTypes.string
+  };
+
   constructor(props) {
     super(props);
-    this.state = {};
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -22,13 +25,5 @@ class MetaTextBox extends AbstractEditor {
     );
   }
 }
-
-MetaTextBox.defaultProps = {
-  value: ''
-};
-
-MetaTextBox.propTypes = {
-    value: PropTypes.string
-};
 
 export default MetaTextBox;
