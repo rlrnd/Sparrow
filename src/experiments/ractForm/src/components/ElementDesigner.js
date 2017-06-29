@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { elementSelected } from '../actions';
+
 
 import MetaForm from './controls/MetaForm';
 import MetaSection from './controls/MetaSection';
@@ -15,42 +19,37 @@ const ElementClassRegistry = {
 
 class ElementDesigner extends Component {
 
+    static propTypes = {
+        elemDef: PropTypes.object,
+        keyValue: PropTypes.number,
+        actions: PropTypes.object
+    };
+
     constructor(props) {
         super(props);
-        this.state = {};
-        this.createInnerElement = this
-            .createInnerElement
-            .bind(this);
-        this.handleClicked = this
-            .handleClicked
-            .bind(this);
+        this.createInnerElement = this.createInnerElement.bind(this);
+        this.handleClicked = this.handleClicked.bind(this);
     }
 
     createInnerElement(elemDef, index, formProps) {
         const elmClass = ElementClassRegistry[elemDef.elmType];
         if (elmClass) {
-            let props = {
-                key: index
-            };
+            let props = {key: index};
             if (elemDef.elmType === "MetaForm") {
                 Object.assign(props, {
-                    data: formProps.data,
-                    schema: formProps.schema,
-                    actions: formProps.actions
+                    exprs: elemDef.exprs, path: ''
                 });
             }
             props = Object.assign(props, elemDef.props);
             let children = null;
             if (elemDef.children && elemDef.children.length) {
-                children = elemDef
-                    .children
-                    .map(function (c, i) {
-                        return React.createElement(ElementDesigner, {
-                            elemDef: c,
-                            key: i + 1,
-                            keyValue: i + 1
-                        }, null);
+                children = elemDef.children.map(function (c, i) {
+                    return React.createElement(FormalElementDesigner, {
+                        elemDef: c,
+                        key: i + 1,
+                        keyValue: i + 1
                     });
+                });
             }
             return React.createElement(elmClass, props, children);
         }
@@ -58,29 +57,20 @@ class ElementDesigner extends Component {
 
     handleClicked(event) {
         event.stopPropagation();
-        this
-            .context
-            .actions
-            .elementSelected(this.props.elemDef);
-        // set state to have the red border?
+        this.props.actions.elementSelected(this);
     }
 
     render() {
-        const innerElement = this.createInnerElement(this.props.elemDef, this.props.keyValue, this.props.context);
+        const innerElement = this.createInnerElement(this.props.elemDef, this.props.keyValue);
         return (
             <div className="js" key={this.props.keyValue} onClick={this.handleClicked}>{innerElement}</div>
         );
     }
 }
 
-ElementDesigner.propTypes = {
-    elemDef: PropTypes.object,
-    keyValue: PropTypes.number,
-    context: PropTypes.object
-};
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators({elementSelected: elementSelected}, dispatch)
+});
 
-ElementDesigner.contextTypes = {
-    actions: PropTypes.any
-};
-
-export default ElementDesigner;
+const FormalElementDesigner = connect(null, mapDispatchToProps)(ElementDesigner);
+export default FormalElementDesigner;

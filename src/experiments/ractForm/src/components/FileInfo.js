@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-const FileInfo = ({lastName, firstName}) => (<div>{lastName}, {firstName}</div>);
+const FileInfo = ({lastName, firstName}) => (<span>{lastName}, {firstName}</span>);
 
 FileInfo.propTypes = {
   lastName: PropTypes.string,

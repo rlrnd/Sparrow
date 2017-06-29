@@ -2,17 +2,20 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as fileActions from '../actions';
+import { updateForm }from '../actions';
 
 class ElementObserver extends Component {    
 
+  static propTypes = {
+    element: PropTypes.object,
+    actions: PropTypes.any
+  };
+
   constructor(props) {
       super(props);
-        this.state = {
-          caption: ""
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSave = this.handleSave.bind(this);
+      this.state = {caption: ''};
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSave = this.handleSave.bind(this);
   }
 
   handleChange(event) {
@@ -22,26 +25,31 @@ class ElementObserver extends Component {
   handleSave(event) {
     let elm = this.props.element;
     if(elm) {
-      elm.props.caption = this.state.caption;
+      let elmDef = elm.props.elemDef;
+      elmDef.props.caption = this.state.caption;
     }
-    this.context.actions.updateForm();
+    elm.forceUpdate();
+    this.props.actions.updateForm();
   }
 
   componentWillUpdate(nextProps, nextState) {
     if(this.props.element !== nextProps.element) {
-      const elm = nextProps.element;
+      let elm = nextProps.element;
       if(elm) {
-        this.setState({caption: elm.props.caption});
+        elm = elm.props.elemDef;
+        if(elm) {
+          this.setState({caption: elm.props.caption});
+          return;
+        }
       }
-      else {
-        this.setState({caption: ""});
-      }
+      this.setState({caption: ""});
     }
   }
 
   render() {
-    const elm = this.props.element;
+    let elm = this.props.element;
     if ( elm ) {
+      elm = elm.props.elemDef;
       return ( 
         <dl>
           <dt>type</dt>
@@ -59,23 +67,13 @@ class ElementObserver extends Component {
   }
 }
 
-ElementObserver.propTypes = {
-  element: PropTypes.object
-};
-
-ElementObserver.contextTypes = {
-    actions: PropTypes.any
-};
-
 const mapStateToProps = state => ({
-  element: state.form.currElement
+    element: state.form.currElement
 });
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(fileActions, dispatch)
+    actions: bindActionCreators({updateForm: updateForm}, dispatch)
 });
 
-export default connect(
-  mapStateToProps, mapDispatchToProps
-)(ElementObserver);
+export default connect(mapStateToProps, mapDispatchToProps)(ElementObserver);
 

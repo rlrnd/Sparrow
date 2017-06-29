@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
+import {Switch, Route, Link} from 'react-router-dom';
 
+import Home from './Home';
 import FileInfo from '../components/FileInfo';
-import FormLoader from '../components/FormLoader';
-import FormDesigner from '../components/FormDesigner';
-import ElementObserver from '../components/ElementObserver';
+import RunnerPage from './RunnerPage';
+import DesignerPage from './DesignerPage';
 
 import logo from '../logo.svg';
 import './App.css';
@@ -11,21 +12,24 @@ import './App.css';
 class App extends Component {
 
   render() {
-    //<FormDesigner data={this.props.file} schema={this.props.schema} />
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo"/>
-          <h2>Static MetaForm</h2>
-          <h3><FileInfo/></h3>
+          <h2>Meta-Form Experiments - React</h2>
+          <div>
+            <FileInfo />&nbsp;|&nbsp;
+            <Link to="/">Home</Link>&nbsp;|&nbsp;
+            <Link to="/loader">Loader</Link>&nbsp;|&nbsp;
+            <Link to="/designer">Designer</Link>
+          </div>
         </div>
         <div className="App-body">
-          <div className="Form-designer">
-            <FormLoader />
-          </div>
-          <div className="Form-observer">
-            <ElementObserver/>
-          </div>
+          <Switch>
+            <Route exact path='/' component={Home}/>
+            <Route path='/loader' component={RunnerPage}/>
+            <Route path='/designer' component={DesignerPage}/>
+          </Switch>          
         </div>
       </div>
     );

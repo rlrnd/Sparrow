@@ -18,7 +18,8 @@ class MetaField extends Component {
         dataType: PropTypes.string,
         visExpr: PropTypes.string,
         visible: PropTypes.bool,
-        readonly: PropTypes.bool
+        readonly: PropTypes.bool,
+        actions: PropTypes.object
     };
 
     constructor(props) {
