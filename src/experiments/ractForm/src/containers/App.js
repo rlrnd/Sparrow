@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Switch, Route, Link} from 'react-router-dom';
+import {withHooks} from '../components/AsyncRoute';
+import $ from 'jquery';
 
 import Home from './Home';
 import FileInfo from '../components/FileInfo';
@@ -9,9 +11,14 @@ import DesignerPage from './DesignerPage';
 import logo from '../logo.svg';
 import './App.css';
 
+async function beforeRoute() {
+  await fetch("http://www.google.com");
+}
+
 class App extends Component {
 
   render() {
+    let AsyncRoute = withHooks(Route,beforeRoute);
     return (
       <div className="App">
         <div className="App-header">
@@ -26,8 +33,8 @@ class App extends Component {
         </div>
         <div className="App-body">
           <Switch>
-            <Route exact path='/' component={Home}/>
-            <Route path='/loader' component={RunnerPage}/>
+            <AsyncRoute exact path='/' component={Home}/>
+            <import path='/loader' component={RunnerPage}/>
             <Route path='/designer' component={DesignerPage}/>
           </Switch>          
         </div>

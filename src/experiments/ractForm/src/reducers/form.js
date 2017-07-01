@@ -87,7 +87,6 @@ const initialState = {
 };
 
 const form = (state = initialState, action) => {
-
     switch(action.type) {
        case ELM_SELECTED: 
          state.currElement = action.elmDef;
