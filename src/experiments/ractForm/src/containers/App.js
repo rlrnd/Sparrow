@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Switch, Route, Link} from 'react-router-dom';
-import {withHooks} from '../components/AsyncRoute';
+import {AsyncRoute} from '../components/AsyncRoute';
 import $ from 'jquery';
 
 import Home from './Home';
@@ -8,17 +8,20 @@ import FileInfo from '../components/FileInfo';
 import RunnerPage from './RunnerPage';
 import DesignerPage from './DesignerPage';
 
+
 import logo from '../logo.svg';
 import './App.css';
 
 async function beforeRoute() {
-  await fetch("http://www.google.com");
+  await fetch("http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=ttc&r=501").then(function(response){
+    window["done"] = "yes";
+    console.log('1');
+  });
 }
 
 class App extends Component {
 
   render() {
-    let AsyncRoute = withHooks(Route,beforeRoute);
     return (
       <div className="App">
         <div className="App-header">
@@ -33,7 +36,7 @@ class App extends Component {
         </div>
         <div className="App-body">
           <Switch>
-            <AsyncRoute exact path='/' component={Home}/>
+            <AsyncRoute beforeHook={beforeRoute} path='/' component={Home}/>
             <import path='/loader' component={RunnerPage}/>
             <Route path='/designer' component={DesignerPage}/>
           </Switch>          
