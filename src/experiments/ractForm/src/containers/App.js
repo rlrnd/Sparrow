@@ -36,9 +36,9 @@ class App extends Component {
         </div>
         <div className="App-body">
           <Switch>
-            <AsyncRoute beforeHook={beforeRoute} path='/' component={Home}/>
-            <import path='/loader' component={RunnerPage}/>
-            <Route path='/designer' component={DesignerPage}/>
+            <Route exact beforeHook={beforeRoute} path='/' component={Home}/>
+            <Route exact path='/loader' component={RunnerPage}/>
+            <Route exact path='/designer' component={DesignerPage}/>
           </Switch>          
         </div>
       </div>

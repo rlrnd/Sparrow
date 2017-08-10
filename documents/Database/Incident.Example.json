@@ -1,0 +1,9 @@
+{
+    "clientId": "1111-2222-3333-4444-5555",
+    "locationTag": "level1-level2-level3-level4",
+    "patient": {
+        "reference": "1234566",
+        "name": "Jian Zhou"
+    },
+    
+}
