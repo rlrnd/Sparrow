@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {Switch, Route, Link} from 'react-router-dom';
-import {AsyncRoute} from '../components/AsyncRoute';
-import $ from 'jquery';
 
 import Home from './Home';
 import FileInfo from '../components/FileInfo';
@@ -11,13 +9,6 @@ import DesignerPage from './DesignerPage';
 
 import logo from '../logo.svg';
 import './App.css';
-
-async function beforeRoute() {
-  await fetch("http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=ttc&r=501").then(function(response){
-    window["done"] = "yes";
-    console.log('1');
-  });
-}
 
 class App extends Component {
 
@@ -36,7 +27,7 @@ class App extends Component {
         </div>
         <div className="App-body">
           <Switch>
-            <Route exact beforeHook={beforeRoute} path='/' component={Home}/>
+            <Route exact path='/' component={Home}/>
             <Route exact path='/loader' component={RunnerPage}/>
             <Route exact path='/designer' component={DesignerPage}/>
           </Switch>          
