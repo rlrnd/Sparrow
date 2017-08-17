@@ -25,5 +25,11 @@ namespace Dodo.Web.Controllers
             return View();
         }
 
+        [Route("/admin/workflow")]
+        public IActionResult Workflow()
+        {
+            return View();
+        }
+
     }
 }

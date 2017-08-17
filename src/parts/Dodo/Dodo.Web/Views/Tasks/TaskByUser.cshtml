@@ -1,0 +1,16 @@
+@model IEnumerable<Dodo.Web.ApplicationHelpers.Task>
+
+    @{
+        ViewData["Title"] = "TaskByUser";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>User @ViewData["uid"]'s Tasks</h2>
+
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li><a href="/files/1/tasks/2">@item.Subject</a></li>
+        }
+    </ul>
+

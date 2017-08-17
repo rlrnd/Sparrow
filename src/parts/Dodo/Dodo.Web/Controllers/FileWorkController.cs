@@ -16,10 +16,13 @@ namespace Dodo.Web.Controllers
         [Route("/files/{fileId}/tasks/{taskId}")]
         public IActionResult Task(int fileId, int taskId)
         {
-            ViewData["data"] = new {
-                fileId = fileId,
-                taskId = taskId
-            };
+            ViewData["fileId"] = fileId;
+            ViewData["taskId"] = taskId;
+            
+            ViewData["taskType"] = "followup";
+            ViewData["formName"] = "inc-followup";
+            
+            //from task id we can get formname?
             return View();
         }
     }

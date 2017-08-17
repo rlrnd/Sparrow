@@ -20,9 +20,11 @@ namespace Dodo.Web.Controllers
         /// <param name="formName"></param>
         /// <param name="fileId"></param>
         /// <returns></returns>
-        [Route("/files/new/{formName}/{fileId}")]
-        public IActionResult NewFile(string formName, int? fileId)
+        [Route("/files/new/{formName}")]
+        public IActionResult NewFile(string formName)
         {
+            ViewData["formName"] = formName;
+            // var fileId = Request.QueryString["file"];
             return View();
         }
     }
