@@ -4,5 +4,73 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Scripts
+{
+    <script type="text/javascript" src="@Url.Content("/lib/bpmn-js/dist/bpmn-viewer.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: "/api/workflow/1",
+                success: function (result) {
+                    if (result) {
+                        if (result != "NULL") {
+                            $("#xmlContent").val(result.content);
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}
+
 <h2>Workflow</h2>
+
+<div class="row">
+    <form>
+        <input id="uploadText" style="width:120px" type="file" size="10" onchange="LoadBPMN();" />
+        <textarea id="xmlContent"></textarea>
+        <button type="button" id="btnLoad" onclick="loadDiagram()">Load</button> |
+        <button type="button" id="btnPublish" onclick="publishDiagram()">Publish</button>
+    </form>
+</div>
+<div class="row">
+    <div id="canvas" />
+</div>
+
+<script type="text/javascript">
+    function loadDiagram() {
+        var xml = $("#xmlContent").val();
+        var BpmnViewer = window.BpmnJS;
+        var viewer = new BpmnViewer({ container: '#canvas' });
+            
+        viewer.importXML(xml, function (err) {
+            if (!err) {
+                console.log('success!');
+                viewer.get('canvas').zoom('fit-viewport');
+            } else {
+                console.log('something went wrong:', err);
+            }
+        });
+    }        
+
+    function publishDiagram() {
+        var xml = $("#xmlContent").val();
+        var data = {
+            content: xml
+        };
+        $.ajax({
+            url: "/api/workflow/1",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "POST",
+            data: JSON.stringify(data),
+            success: function (result) {
+                debugger;
+            }
+
+        })
+
+    }    
+    
+</script>
 

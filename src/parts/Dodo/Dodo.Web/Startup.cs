@@ -12,6 +12,9 @@ namespace Dodo.Web
 {
     public class Startup
     {
+        public static string databaseConnection = null;
+        public static string camundaUrl = null;
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -20,6 +23,9 @@ namespace Dodo.Web
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            Startup.databaseConnection = Configuration.GetSection("database").Value;
+            Startup.camundaUrl = Configuration.GetSection("camunda").Value;
         }
 
         public IConfigurationRoot Configuration { get; }
