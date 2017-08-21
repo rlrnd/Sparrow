@@ -6,13 +6,43 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Dodo.CamundaClient;
 using Dodo.CamundaClient.Dto;
 
 namespace Dodo.CamundaClient.Requests
 {
+    public class LoggingHandler : DelegatingHandler
+    {
+        public LoggingHandler(HttpMessageHandler innerHandler) : base(innerHandler)
+        {
+        }
 
+        protected async override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            Console.WriteLine("Request:");
+            Console.WriteLine(request.ToString());
+            if (request.Content != null)
+            {
+                string re = await request.Content.ReadAsStringAsync();
+                Console.WriteLine(re);
+            }
+            Console.WriteLine();
+
+            HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
+
+            Console.WriteLine("Response:");
+            Console.WriteLine(response.ToString());
+            if (response.Content != null)
+            {
+                Console.WriteLine(await response.Content.ReadAsStringAsync());
+            }
+            Console.WriteLine();
+
+            return response;
+        }
+    }
 
     /*
     * Basis taken from http://www.briangrinstead.com/blog/multipart-form-post-in-c
@@ -23,27 +53,35 @@ namespace Dodo.CamundaClient.Requests
 
         public static HttpResponseMessage MultipartFormDataPost(string postUrl, string username, string password, Dictionary<string, object> postParameters)
         {
-            using (var client = new HttpClient())
+            using (var client = new HttpClient(new LoggingHandler(new HttpClientHandler())))
             {
                 var content = new MultipartFormDataContent();
-                foreach(KeyValuePair<string,object> kvp in postParameters)
+                foreach (KeyValuePair<string, object> kvp in postParameters)
                 {
-                    if(kvp.Value is List<object>)
+                    if (kvp.Value is List<object>)
                     {
                         List<object> lists = (List<object>)kvp.Value;
-                        if(lists.Count > 0 )
+                        if (lists.Count > 0)
                         {
-                            object f1 = lists[0];
-                            if(f1 is FileParameter)
+                            foreach (var f in lists)
                             {
-                                FileParameter fp = (FileParameter)f1;
-                                content.Add(new ByteArrayContent(fp.File), "data", fp.FileName);
+                                var fp = (FileParameter)f;
+                                var byteArrayContent = new ByteArrayContent(fp.File);
+                                var header = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data");
+                                header.Name = fp.FileName;
+                                header.FileName = fp.FileName;
+                                header.FileNameStar = null;
+                                byteArrayContent.Headers.ContentDisposition = header;
+                                byteArrayContent.Headers.Add("Content-Type", "application/octet-stream");
+                                content.Add(byteArrayContent);
                             }
                         }
                     }
                     else
                     {
-                        content.Add(new StringContent((string)kvp.Value), kvp.Key);
+                        var sc = new StringContent((string)kvp.Value);
+                        sc.Headers.Clear();
+                        content.Add(sc, @"""" + kvp.Key + @"""");
                     }
                 }
                 if (!string.IsNullOrEmpty(username))

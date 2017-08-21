@@ -6,8 +6,8 @@ using Dodo.CamundaClient.Worker;
 
 namespace Dodo.CamundaCompanion.Workers
 {
-    [ExternalTaskTopic("appNotification")]
-    [ExternalTaskVariableRequirements("name", "subject", "content", "email")]
+    [ExternalTaskTopic("dodoNotify")]
+    [ExternalTaskVariableRequirements("fileId", "details", "submittedBy")]
     public class NotificationAdapter : IExternalTaskAdapter
     {
         public void Execute(ExternalTask externalTask, ref Dictionary<string, object> resultVariables)

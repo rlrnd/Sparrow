@@ -99,7 +99,7 @@ namespace Dodo.Web.ApplicationHelpers
             camunda.Startup();
             try
             {
-                string deploymentId = camunda.RepositoryService.Deploy("DodoAppRule", new List<object> { new FileParameter(System.Text.Encoding.UTF8.GetBytes(bpmn), "DodoAppRule") });
+                string deploymentId = camunda.RepositoryService.Deploy("DodoAppRule", new List<object> { new FileParameter(System.Text.Encoding.UTF8.GetBytes(bpmn), "DodoAppRule.bpmn") });
             }
             finally
             {

@@ -4,8 +4,36 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Submission Form using @ViewData["formName"]</h2>
-<textarea>
+@section Scripts
+{
+    <script type="text/javascript">
+        function submitFile() {
+            var file = JSON.parse($("#taFile").val());
+            var data = { file: file };
+            $.ajax({
+                url: "/api/files/new",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                type: "POST",
+                data: JSON.stringify(data),
+                success: function (result) {
+                    debugger;
+                }
 
+            });
+        };
+    </script>
+}
+<h2>Submission Form using @ViewData["formName"]</h2>
+
+<textarea id="taFile">
+{ "fileId": 1, "tenantId": "fef554a9-e234-4177-8dac-0680702d4ec7", "unitId": "e1b05144-be56-4d9e-a8fb-c966fb7d8bc2", "type": "Fall", "severity": "Injury", "submittedBy": "a@b.com", "details": {
+        "patient": "jian zhou",
+        "age": 45,
+        "gender": "male"
+    }
+}
 </textarea>
+
+<button id="btnSubmit" type="button" onclick="submitFile()">Submit</button>
 

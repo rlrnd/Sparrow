@@ -90,9 +90,11 @@ namespace WorkflowCompanion
                     {
                         var vs = camunda.HumanTaskService.LoadVariables(task.Id);
                         var ps = Program.GetTaskVariables("userTask", task.TaskDefinitionKey);
-
-                        //these tasks need to be created in database
-
+                        System.Threading.Thread.Sleep(5000);
+                        camunda.HumanTaskService.Complete(task.Id, new Dictionary<string, object>() {
+                            {"completed", true }
+                        });
+                        Console.WriteLine("Complete human task " + ps["taskType"] + "on " + vs["fileId"].ToString());
                     }
                 }
                 System.Threading.Thread.Sleep(5000);
