@@ -81,7 +81,7 @@ namespace Dodo.Web.ApplicationHelpers
                         string stmtUpdate = @"UPDATE dbo.workflows set bpmn_details = @bpmn WHERE id = @id";
                         using (var cmd = new NpgsqlCommand(stmtUpdate, connection))
                         {
-                            cmd.Parameters.AddWithValue("@id", Guid.NewGuid());
+                            cmd.Parameters.AddWithValue("@id", id);
                             var p = cmd.Parameters.AddWithValue("@bpmn", bpmn);
                             p.DbType = DbType.Xml;
                             cmd.ExecuteNonQuery();

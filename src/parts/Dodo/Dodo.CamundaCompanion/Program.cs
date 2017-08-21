@@ -51,14 +51,14 @@ namespace Dodo.CamundaCompanion
                 connection.Open();
                 try
                 {
-                    const string stmt = @"SELECT process_id, bpmn_details FROM dbo.workflows WHERE tenant_id='first-tenant'";
+                    const string stmt = @"SELECT process_id, bpmn_details FROM dbo.workflows WHERE tenant_id='fef554a9-e234-4177-8dac-0680702d4ec7'";
                     using(var cmd = new NpgsqlCommand(stmt, connection))
                     {
                         using(var reader = cmd.ExecuteReader())
                         {
                             if(reader.Read())
                             {
-                                processId = reader.GetString(0);
+                                //processId = reader.GetString(0);
                                 var doc = reader.GetString(1);
                                 CachedDoc = new XmlDocument();
                                 CachedDoc.LoadXml(doc);
@@ -128,9 +128,14 @@ namespace Dodo.CamundaCompanion
 
                                             cmd.Parameters.Clear();
                                             cmd.Parameters.AddWithValue("@id", Guid.NewGuid());
-                                            //cmd.Parameters.AddWithValue("@uid", uid);
+                                            cmd.Parameters.AddWithValue("@uid", "1");
                                             cmd.Parameters.AddWithValue("@wf_task_id", task.Id);
-
+                                            cmd.Parameters.AddWithValue("@type", ps["taskType"]);
+                                            // cmd.Parameters.AddWithValue("@due_date",  -- somewhere + delta.from.params
+                                            //subject
+                                            cmd.Parameters.AddWithValue("@file_id", ps["file_id"]);
+                                            cmd.Parameters.AddWithValue("@action_type", "from parms" );
+                                            cmd.Parameters.AddWithValue("@details", ps["dts"]);
                                             cmd.ExecuteNonQuery();
                                             // Some log?
                                         }
