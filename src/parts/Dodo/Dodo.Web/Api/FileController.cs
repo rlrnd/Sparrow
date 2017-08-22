@@ -21,6 +21,7 @@ namespace Dodo.Web.Api
         {
             var o = (Newtonsoft.Json.Linq.JObject )file["file"];
             dynamic od = (dynamic)o;
+            Guid fileId = Guid.NewGuid();
             // Save it to Postgresql
             using (var connection = new NpgsqlConnection(Startup.databaseConnection))
             {
@@ -31,7 +32,7 @@ namespace Dodo.Web.Api
                 {
                     using (var cmd = new NpgsqlCommand(stmt, connection))
                     {
-                        cmd.Parameters.AddWithValue("@id", Guid.NewGuid());
+                        cmd.Parameters.AddWithValue("@id", fileId );
                         cmd.Parameters.AddWithValue("@tenant_id", Guid.Parse((string)od.tenantId.Value));
                         cmd.Parameters.AddWithValue("@patient_id", DBNull.Value);
                         cmd.Parameters.AddWithValue("@unit_id", Guid.Parse((string)od.unitId.Value));
@@ -58,11 +59,25 @@ namespace Dodo.Web.Api
             try
             {
                 var ft = o.ToObject<Dictionary<string, object>>();
+                ft["fileId"] = fileId;
                 string processInstanceId = camunda.BpmnWorkflowService.StartProcessInstance("dodoAppRule", ft);
             }
             finally
             {
                 camunda.Shutdown();
+            }
+            return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        [Route("/api/files/{fid}/tasks/{tid}")]
+        public object appendToFile( [FromRoute]Guid fid, [FromRoute]Guid tid, [FromBody] Dictionary<string,object> data )
+        {
+            string actionName = (string)data["formName"];
+            ApplicationHelpers.FileHelper.AppendFileFollowup(fid, tid, actionName, data["activity"]);
+            if((bool)data["completeTask"])
+            {
+                ApplicationHelpers.TaskHelper.CompleteTask(tid);
             }
             return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
         }

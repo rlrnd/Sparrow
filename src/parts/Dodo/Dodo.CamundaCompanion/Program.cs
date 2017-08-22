@@ -82,6 +82,12 @@ namespace Dodo.CamundaCompanion
             }
         }
 
+        protected static Guid FindUserByParams( string unitId, string roleName )
+        {
+            //Simulation, find the user from the tenant/unit/role combination
+            return Guid.Parse("38c05039-1af1-4f6d-9408-37402c9cab5d");
+        }
+
         static void Main(string[] args)
         {
             var builder = new ConfigurationBuilder()
@@ -124,18 +130,36 @@ namespace Dodo.CamundaCompanion
                                             var vs = camunda.HumanTaskService.LoadVariables(task.Id);
                                             var ps = Program.GetTaskVariables("userTask", task.TaskDefinitionKey);
 
-                                            //Guid uid =  FindUserByParams(vs, ps);
+                                            string roleName = ps["roleName"];
+                                            string unitId = (string)vs["unitId"];
+                                            Guid uid =  FindUserByParams(unitId, roleName);
+
+                                            string expiry = ps["expiry"];
+                                            int days;
+                                            
+                                            if(!Int32.TryParse(expiry, out days))
+                                            {
+                                                days = 0;
+                                            }
 
                                             cmd.Parameters.Clear();
                                             cmd.Parameters.AddWithValue("@id", Guid.NewGuid());
-                                            cmd.Parameters.AddWithValue("@uid", "1");
+                                            cmd.Parameters.AddWithValue("@uid", uid);
                                             cmd.Parameters.AddWithValue("@wf_task_id", task.Id);
                                             cmd.Parameters.AddWithValue("@type", ps["taskType"]);
-                                            // cmd.Parameters.AddWithValue("@due_date",  -- somewhere + delta.from.params
-                                            //subject
-                                            cmd.Parameters.AddWithValue("@file_id", ps["file_id"]);
-                                            cmd.Parameters.AddWithValue("@action_type", "from parms" );
-                                            cmd.Parameters.AddWithValue("@details", ps["dts"]);
+                                            if(days > 0 )
+                                            {
+                                                cmd.Parameters.AddWithValue("@due_date", DateTime.UtcNow.AddDays(days));
+                                            }
+                                            else
+                                            {
+                                                cmd.Parameters.AddWithValue("@due_date", DBNull.Value);
+                                            }
+
+                                            cmd.Parameters.AddWithValue("@subject", "someText");
+                                            cmd.Parameters.AddWithValue("@file_id", Guid.Parse((string)vs["fileId"]));
+                                            cmd.Parameters.AddWithValue("@action_type", "fakeFormName" );
+                                            cmd.Parameters.AddWithValue("@details", "Something else");
                                             cmd.ExecuteNonQuery();
                                             // Some log?
                                         }

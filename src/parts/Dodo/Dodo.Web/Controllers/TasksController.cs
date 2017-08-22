@@ -10,7 +10,9 @@ namespace Dodo.Web.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            string uid = "someone";
+            ViewData["uid"] = uid;
+            return View(ApplicationHelpers.TaskHelper.GetTasksForUser(uid)); 
         }
 
         [Route("/users/{uid}/tasks")]

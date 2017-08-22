@@ -4,8 +4,57 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+@section Scripts
+ {
+    <script type="text/javascript">
+        function submitActivity() {
+            let activity = JSON.parse($("#taActivity").val());
+            let completeTask = $("#cbCompleteTask").prop("checked");
+            const fileid = $("#fileId").val();
+            const taskid = $("#taskId").val();
+            const url = "/api/files/" + fileid + "/tasks/" + taskid;
+            let data = {
+                activity: activity,
+                formName: '@Model.Task.FormName',
+                completeTask: completeTask
+            };
+            
+            $.ajax({
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                type: "POST",
+                data: JSON.stringify(data),
+                success: function (result) {
+                    debugger;
+                }
+
+            });
+        };
+    </script>
+}
+
 <h2>Task</h2>
 
-Adding @ViewData["taskType"] to file @ViewData["fileId"] for task @ViewData["taskId"] 
+Adding @Model.Task.Type to file @ViewData["fileId"] for task @ViewData["taskId"] using Form @Model.Task.FormName
+<input type="hidden" id="fileId" value="@ViewData["fileId"]" />
+<input type="hidden" id="taskId" value="@ViewData["taskId"]" />
+<hr/>
+<dl>
+    <dt>Type</dt><dd>@Model.File.IncidentType</dd>
+    <dt>Severity</dt><dd>@Model.File.Severity</dd>
+    <dt>State</dt><dd>@Model.File.State</dd>
+    <dt>Details</dt><dd>@Model.File.Details</dd>
+</dl>
+<hr/>
+<h3>Form @Model.Task.FormName</h3>
+<div>
+    <textarea id="taActivity">
+        {"communication": "Call", "doneBy": "Jian"}
+    </textarea>
+    <input type="checkbox" id="cbCompleteTask" />Complete the task
+    <button id="btnOK" onclick="submitActivity()">Submit</button>
+</div>
   
 

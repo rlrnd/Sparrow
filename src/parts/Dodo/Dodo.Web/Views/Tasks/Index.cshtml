@@ -1,0 +1,14 @@
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User @ViewData["uid"]'s Tasks</h2>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li><a href="/files/@item.FileId/tasks/@item.Id">@item.Subject</a></li>
+    }
+</ul>

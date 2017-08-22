@@ -6,6 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Dodo.Web.Controllers
 {
+    public class FileTaskModel
+    {
+        public ApplicationHelpers.Task Task {get;set;}
+        public System.Dynamic.ExpandoObject File { get; set; }
+    }
+
     public class FileWorkController : Controller
     {
         public IActionResult Index()
@@ -14,16 +20,13 @@ namespace Dodo.Web.Controllers
         }
 
         [Route("/files/{fileId}/tasks/{taskId}")]
-        public IActionResult Task(int fileId, int taskId)
+        public IActionResult Task(Guid fileId, Guid taskId)
         {
+            var task = ApplicationHelpers.TaskHelper.GetTaskById(taskId);
+            var file = ApplicationHelpers.FileHelper.GetFileById(fileId);
             ViewData["fileId"] = fileId;
             ViewData["taskId"] = taskId;
-            
-            ViewData["taskType"] = "followup";
-            ViewData["formName"] = "inc-followup";
-            
-            //from task id we can get formname?
-            return View();
+            return View(new FileTaskModel { File = file, Task = task } );
         }
     }
 }
