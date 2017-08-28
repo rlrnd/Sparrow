@@ -171,7 +171,7 @@ namespace Dodo.CamundaCompanion
                                 }
                             }
                         }
-
+                        System.Threading.Thread.Sleep(2000);
                     }
                 }
                 finally
