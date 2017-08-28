@@ -7,7 +7,7 @@ Installation
 * Extract the content of the camunda zip to a folder ( I picked C:\camunda-bpm-tomcat-latest\ )
 * Find a postgresql jdbc driver (postgresql-42.1.1.jar) and put it in C:\camunda-bpm-tomcat-latest\server\apache-tomcat-8.0.24\lib
 * Editing configuration file (C:\camunda-bpm-tomcat-latest\server\apache-tomcat-8.0.24\conf\server.xml) and modify the database connection
-<pre>
+`
   <Resource name="jdbc/ProcessEngine"
               auth="Container"
               type="javax.sql.DataSource" 
@@ -20,7 +20,7 @@ Installation
               password="postgres"
               maxActive="20"
               minIdle="5" />
-</pre>
+`
  * Run "PgAdmin4" and connect to local server, creating an empty database, I named it "camunda"
  * On this empty database, execute the postgres_engine_7.7.0.sql and postgres_identity_7.7.0.sql from C:\camunda-bpm-tomcat-latest\sql\create
  * Now you can run start-camunda.bat from C:\camunda-bpm-tomcat-latest from command line and it will open several windows, that's fine. 
