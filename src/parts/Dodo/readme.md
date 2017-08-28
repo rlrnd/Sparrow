@@ -48,6 +48,7 @@ Installation
  Guesses:
  * Eliminate the need of camundaCompanion using Java code and deploy directly into engine? 
  * Which way to go? Using their security/multi-tenancy or our own?
+ * Can this replace info-center?
 
  Next Steps:
  * Bug while execute both in debug mode in same VS.NET. 
