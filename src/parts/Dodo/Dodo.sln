@@ -1,15 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.3
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dodo.Web", "Dodo.Web\Dodo.Web.csproj", "{86129444-635A-41CE-9E34-3922B222F289}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dodo.Migration", "Dodo.Migration\Dodo.Migration.csproj", "{E55C7FB4-AB62-4665-A61A-91BF7FB93809}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dodo.CamundaCompanion", "Dodo.CamundaCompanion\Dodo.CamundaCompanion.csproj", "{55528622-F4F3-4608-BDAF-7ACE48E25D10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dodo.CamundaCompanion", "Dodo.CamundaCompanion\Dodo.CamundaCompanion.csproj", "{55528622-F4F3-4608-BDAF-7ACE48E25D10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dodo.CamundaClient", "Dodo.CamundaClient\Dodo.CamundaClient.csproj", "{7948351F-F097-4486-AA1C-88E305B1E093}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dodo.CamundaClient", "Dodo.CamundaClient\Dodo.CamundaClient.csproj", "{7948351F-F097-4486-AA1C-88E305B1E093}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E206C5DF-4558-4C9F-8AC9-4E3AC295A2D5}"
+	ProjectSection(SolutionItems) = preProject
+		db.sql = db.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
