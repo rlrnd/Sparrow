@@ -28,15 +28,10 @@ namespace Dodo.CamundaCompanion
                 XmlNode taskNode = CachedDoc.SelectSingleNode(query, CachedDocNsManager);
                 if (taskNode != null)
                 {
-                    foreach (XmlNode f in taskNode.SelectNodes("bpmn2:extensionElements/camunda:field", CachedDocNsManager))
+                    foreach (XmlNode f in taskNode.SelectNodes("bpmn2:extensionElements/camunda:properties/camunda:property", CachedDocNsManager))
                     {
                         string name = f.Attributes["name"].Value;
-                        string value = "";
-                        XmlNode vNode = f.SelectSingleNode("camunda:string", CachedDocNsManager);
-                        if (vNode != null)
-                        {
-                            value = vNode.InnerText;
-                        }
+                        string value = f.Attributes["value"].Value; 
                         results.Add(name, value);
                     }
                 }

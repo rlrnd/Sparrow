@@ -10,7 +10,7 @@
     <ul>
         @foreach (var item in Model)
         {
-            <li><a href="/files/1/tasks/2">@item.Subject</a></li>
+            <li><a href="/files/{@item.FileId}/tasks/{@item.Id}">@item.Subject</a></li>
         }
     </ul>
 

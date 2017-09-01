@@ -12,6 +12,7 @@ namespace Dodo.CamundaCompanion.Workers
     {
         public void Execute(ExternalTask externalTask, ref Dictionary<string, object> resultVariables)
         {
+            var tp = Program.GetTaskVariables("sendTask", "Task_1yekdgs");
             Console.WriteLine("notifying");
             // Put breakpoint here, email or popup?
         }
