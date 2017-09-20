@@ -26,7 +26,8 @@ namespace nestBit
             Configuration = builder.Build();
 
             string url = Configuration["elasticSearch:url"];
-            string elasticSearchIndex = Configuration["elasticSearch:index"];
+            //string elasticSearchIndex = Configuration["elasticSearch:index"];
+            string elasticSearchIndex = "customer/external";
             string userName = Configuration["elasticSearch:userName"];
             string password = Configuration["elasticSearch:password"];
             // add some files
@@ -41,7 +42,7 @@ namespace nestBit
             settings.BasicAuthentication(userName, password);
 
             var client = new ElasticClient(settings);
-
+            /*
             var patient = new Patient
             {
                 Id = 1,
@@ -54,10 +55,17 @@ namespace nestBit
                     }
                 }
             };
-            var response = client.Index(patient, idx => idx.Index(elasticSearchIndex));
+            */
+
+            Customer customer = new Customer()
+            {
+                Name = "Test Customer from NEST"
+            };
+
+            var response = client.Index(customer, idx => idx.Index(elasticSearchIndex));
             Console.WriteLine(JsonConvert.SerializeObject(response));
 
-            var patientResult = client.Get<Patient>(response.Id, idx => idx.Index(elasticSearchIndex));
+            var patientResult = client.Get<Customer>(response.Id, idx => idx.Index(elasticSearchIndex));
             Console.WriteLine(JsonConvert.SerializeObject(patientResult));
 
 
@@ -65,6 +73,11 @@ namespace nestBit
         }
 
 
+    }
+
+    internal class Customer
+    {
+        public string Name { get; set; }
     }
 
     internal class Patient
